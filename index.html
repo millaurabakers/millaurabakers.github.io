@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Millaura Bakers – Something Sweet is Coming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf6ed;
+      --warm-brown: #4a2c0a;
+      --caramel: #c47c2b;
+      --soft-rose: #e8b89a;
+      --dark: #1e0f00;
+      --light-tan: #f5e6ce;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Jost', sans-serif;
+      background-color: var(--cream);
+      color: var(--warm-brown);
+      overflow-x: hidden;
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.5;
+    }
+
+    /* Decorative background circles */
+    .bg-circle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-circle-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(196,124,43,0.12) 0%, transparent 70%);
+      top: -200px; right: -150px;
+    }
+    .bg-circle-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,184,154,0.2) 0%, transparent 70%);
+      bottom: -150px; left: -100px;
+    }
+
+    /* Main layout */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    /* Cookie icon */
+    .cookie-icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+      display: block;
+      animation: float 3.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-5deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+
+    /* Logo / brand */
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      color: var(--warm-brown);
+      animation: fadeUp 0.9s ease both;
+    }
+    .brand em {
+      font-style: italic;
+      color: var(--caramel);
+    }
+
+    .tagline {
+      margin-top: 12px;
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--caramel);
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+
+    /* Divider */
+    .divider {
+      margin: 32px auto;
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--caramel), transparent);
+      animation: fadeUp 0.9s 0.25s ease both;
+    }
+
+    /* Headline */
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--warm-brown);
+      max-width: 560px;
+      line-height: 1.5;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+
+    .sub {
+      margin-top: 14px;
+      font-size: 15px;
+      font-weight: 300;
+      color: #7a5535;
+      max-width: 440px;
+      line-height: 1.8;
+      animation: fadeUp 0.9s 0.45s ease both;
+    }
+
+    /* Products */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 36px;
+      animation: fadeUp 0.9s 0.55s ease both;
+    }
+
+    .product-tag {
+      background: var(--light-tan);
+      border: 1.5px solid rgba(196,124,43,0.3);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--warm-brown);
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+    .product-tag:hover {
+      background: var(--caramel);
+      color: white;
+      border-color: var(--caramel);
+      transform: translateY(-2px);
+    }
+
+    /* Coming soon badge */
+    .badge {
+      margin-top: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--warm-brown);
+      color: var(--cream);
+      padding: 12px 28px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      animation: fadeUp 0.9s 0.65s ease both;
+    }
+
+    .badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--soft-rose);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* Email form */
+    .notify-section {
+      margin-top: 36px;
+      animation: fadeUp 0.9s 0.75s ease both;
+    }
+    .notify-section p {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: #9a7050;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .email-row {
+      display: flex;
+      gap: 0;
+      border-radius: 100px;
+      overflow: hidden;
+      border: 1.5px solid rgba(196,124,43,0.35);
+      background: white;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .email-row input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 13px 20px;
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      background: transparent;
+      color: var(--warm-brown);
+    }
+    .email-row input::placeholder { color: #bba080; }
+    .email-row button {
+      border: none;
+      background: var(--caramel);
+      color: white;
+      padding: 13px 24px;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .email-row button:hover { background: var(--warm-brown); }
+
+    /* Success message */
+    .success-msg {
+      display: none;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--caramel);
+      font-weight: 500;
+      letter-spacing: 1px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    /* Order info cards */
+    .order-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 48px;
+      max-width: 700px;
+      animation: fadeUp 0.9s 0.85s ease both;
+    }
+    .order-card {
+      background: white;
+      border: 1.5px solid rgba(196,124,43,0.2);
+      border-radius: 20px;
+      padding: 24px 28px;
+      flex: 1;
+      min-width: 240px;
+      text-align: left;
+      transition: box-shadow 0.25s ease;
+    }
+    .order-card:hover { box-shadow: 0 8px 32px rgba(196,124,43,0.12); }
+    .order-card .card-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .order-card h3 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--warm-brown); margin-bottom: 6px; }
+    .order-card p { font-size: 13px; font-weight: 300; color: #7a5535; line-height: 1.7; margin-bottom: 10px; }
+    .order-card a { font-size: 13px; font-weight: 500; color: var(--caramel); text-decoration: none; letter-spacing: 0.5px; border-bottom: 1px solid rgba(196,124,43,0.3); padding-bottom: 1px; transition: color 0.2s; }
+    .order-card a:hover { color: var(--warm-brown); }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: #bba080;
+      animation: fadeUp 0.9s 0.95s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-circle bg-circle-1"></div>
+  <div class="bg-circle bg-circle-2"></div>
+
+  <div class="wrapper">
+
+    <span class="cookie-icon">🍪</span>
+
+    <h1 class="brand">Mill<em>aura</em><br>Bakers</h1>
+    <p class="tagline">Handcrafted with love</p>
+
+    <div class="divider"></div>
+
+    <p class="headline">Something wonderfully delicious<br>is being baked for you.</p>
+    <p class="sub">We're putting the finishing touches on our website. Our handcrafted cookies are almost ready to be shared with the world.</p>
+
+    <div class="products">
+      <span class="product-tag">🍪 Classic Cookies</span>
+      <span class="product-tag">🌿 Healthy Cookies</span>
+      <span class="product-tag">✨ Handcrafted Cookies</span>
+    </div>
+
+    <div class="badge">
+      <span class="dot"></span>
+      Website Under Construction
+    </div>
+
+    <div class="notify-section">
+      <p>Get notified when we launch</p>
+      <div class="email-row">
+        <input type="email" id="notifyEmail" placeholder="your@email.com" />
+        <button onclick="handleNotify()">Notify Me</button>
+      </div>
+      <p class="success-msg" id="successMsg">✓ Thanks! We'll be in touch soon 🍪</p>
+    </div>
+
+    <div class="order-cards">
+      <div class="order-card">
+        <span class="card-icon">📦</span>
+        <h3>Order Confirmation</h3>
+        <p>Placed an order with us? You'll receive a confirmation email as soon as it's processed.</p>
+        <a href="mailto:orders@millaurabakers.com">orders@millaurabakers.com</a>
+      </div>
+      <div class="order-card">
+        <span class="card-icon">🚚</span>
+        <h3>Order Status</h3>
+        <p>Want to check on your order or need an update? Reach out and we'll get back to you quickly.</p>
+        <a href="mailto:orders@millaurabakers.com">orders@millaurabakers.com</a>
+      </div>
+      <div class="order-card">
+        <span class="card-icon">💬</span>
+        <h3>General Support</h3>
+        <p>Have a question about our cookies or want to get in touch? We'd love to hear from you.</p>
+        <a href="mailto:support@millaurabakers.com">support@millaurabakers.com</a>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2026 Millaura Bakers &nbsp;·&nbsp; All rights reserved
+      &nbsp;·&nbsp; <a href="mailto:support@millaurabakers.com" style="color:#bba080;">support@millaurabakers.com</a>
+    </footer>
+
+  <script>
+    function handleNotify() {
+      const input = document.getElementById('notifyEmail');
+      const msg = document.getElementById('successMsg');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        input.style.outline = '2px solid #c47c2b';
+        setTimeout(() => input.style.outline = 'none', 1500);
+        return;
+      }
+      window.location.href = 'mailto:support@millaurabakers.com?subject=Launch Notification Request&body=Please notify me when Millaura Bakers launches! My email: ' + encodeURIComponent(email);
+      msg.style.display = 'block';
+      input.value = '';
+    }
+  </script>
+
+  </div>
+
+</body>
+</html>
