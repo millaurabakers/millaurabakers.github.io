@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Millaura Bakers | Elite Gourmet Millet Cookies</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#4d4635",
+                    "on-primary-container": "#554300",
+                    "outline": "#99907c",
+                    "background": "#121414",
+                    "on-tertiary": "#313030",
+                    "on-secondary": "#313030",
+                    "on-secondary-fixed-variant": "#474646",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary-fixed": "#241a00",
+                    "surface-container-highest": "#343535",
+                    "surface-container": "#1f2020",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#d0c5af",
+                    "primary-container": "#d4af37",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "inverse-surface": "#e3e2e2",
+                    "surface": "#121414",
+                    "primary-fixed": "#ffe088",
+                    "inverse-on-surface": "#2f3031",
+                    "secondary-container": "#4a4949",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "surface-container-low": "#1b1c1c",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-primary-fixed-variant": "#574500",
+                    "on-background": "#e3e2e2",
+                    "surface-dim": "#121414",
+                    "on-primary": "#3c2f00",
+                    "secondary": "#c8c6c5",
+                    "error-container": "#93000a",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-bright": "#383939",
+                    "surface-variant": "#343535",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-container-high": "#292a2a",
+                    "surface-container-lowest": "#0d0e0f",
+                    "tertiary-fixed": "#e5e2e1",
+                    "inverse-primary": "#735c00",
+                    "on-surface": "#e3e2e2",
+                    "on-error": "#690005",
+                    "primary": "#f2ca50",
+                    "on-tertiary-container": "#454544",
+                    "tertiary": "#d0cdcd",
+                    "tertiary-container": "#b4b2b2",
+                    "on-secondary-container": "#bab8b7",
+                    "surface-tint": "#e9c349",
+                    "obsidian": "#121212",
+                    "graphite": "#1A1A1A"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "120px",
+                    "container-max": "1280px",
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "32px",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Bodoni Moda"],
+                    "display-lg-mobile": ["Bodoni Moda"],
+                    "label-caps": ["Hanken Grotesk"],
+                    "headline-md": ["Bodoni Moda"],
+                    "headline-lg": ["Bodoni Moda"],
+                    "body-md": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Bodoni Moda"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .gold-metallic-border {
+            border-image: linear-gradient(to bottom right, #D4AF37, #F2CA50, #AA8A2E) 1;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at center, rgba(18,18,18,0) 0%, rgba(18,18,18,0.8) 70%, rgba(18,18,18,1) 100%);
+        }
+        .dotted-leader {
+            border-bottom: 2px dotted #4d4635;
+            flex-grow: 1;
+            margin: 0 12px 6px 12px;
+        }
+        .signature {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-elevated/80 dark:bg-surface-elevated/80 backdrop-blur-md border-b border-primary/15 shadow-sm">
+<div class="flex justify-between items-center px-6 md:px-16 py-4 max-w-container-max mx-auto">
+<div class="h-12 w-auto">
+<a href="#"><img alt="Millaura Bakers Logo" class="h-full w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZNyXPy-GoIkZF9xqmTyrjfWwtWD4Intt1uY-vxZwbF60nUU2-XUMThmld72AVwJcJPQZ7V1De4ytQ_9h1oqe04SLq6lxstjI6N1D8KQajmuxiQlQoUIE-SvXNDgSTuioBEhhmVs4yhGOb9O07TySUxACcZWqwht6LvqygNrJNIiGqttgl6ZoLIon_Sm7ocdhltZzFR6qdEW3lf3Q-z_lSVoiyKV8O_ZverjvefDhgrehDmIIBMqKvNazlDrxII2t8qaY6A1ZvElkc"/></a>
+</div>
+<div class="hidden md:flex items-center space-x-10">
+<a class="font-nav-link text-nav-link uppercase tracking-widest text-on-surface/75 hover:text-primary transition-opacity duration-300" href="#cookies">Cookies</a>
+<a class="font-nav-link text-nav-link uppercase tracking-widest text-on-surface/75 hover:text-primary transition-opacity duration-300" href="#heritage">Heritage</a>
+<a class="font-nav-link text-nav-link uppercase tracking-widest text-on-surface/75 hover:text-primary transition-opacity duration-300" href="#gifting">Gifting</a>
+<a class="font-nav-link text-nav-link uppercase tracking-widest text-on-surface/75 hover:text-primary transition-opacity duration-300" href="#locate">Locate</a>
+</div>
+<div class="flex items-center gap-6">
+<a class="text-primary transition-transform scale-95 active:scale-90" href="mailto:orders@millaurabakers.com">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+<div class="absolute inset-0 hero-gradient z-10"></div>
+<div class="relative z-20 container mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-6 text-center md:text-left">
+<p class="font-label-caps text-label-caps text-primary mb-6 animate-pulse">PREMIUM MILLET SELECTION</p>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-8">Handcrafted Millet Cookies</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-12 leading-relaxed">
+                    Rediscover the ancient grains through a lens of modern luxury. Each artisanal creation is meticulously baked with heritage techniques and locally sourced millets for an unparalleled gourmet experience.
+                </p>
+<div class="flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
+<a class="bg-primary text-on-primary-container px-10 py-5 font-label-caps text-label-caps uppercase tracking-[0.2em] hover:brightness-110 transition-all shadow-xl shadow-primary/10 inline-block" href="mailto:support@millaurabakers.com?subject=Notify Me Request">
+                        Notify Me
+                    </a>
+<a class="border border-primary/40 text-primary px-10 py-5 font-label-caps text-label-caps uppercase tracking-[0.2em] hover:bg-primary/5 transition-all inline-block" href="#cookies">
+                        The Collection
+                    </a>
+</div>
+</div>
+<div class="md:col-span-6 relative flex justify-center mt-12 md:mt-0">
+<div class="relative w-full max-w-lg aspect-square group">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<img class="w-full h-full object-contain relative z-10 transform group-hover:scale-105 transition-transform duration-700" data-alt="A macro, cinematic photograph of a single gourmet millet cookie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChnr3lssJyJP6FjHQGFAssI1MOfzqf78lmWt62rjocBIUKUHHNTmF4p240LqjvIKKmpuQjlBPvzDWRj-QVDMWX65Z8jGDBwBdfCYEv5Fs9v9zMxNRTCYpCe1NvPZCG8xLZr-dPmDVBu6n8oNiD9TPiGOE6x74cFFhZGiDrUgeG770vVLOtPBDkWi55_0vNv4McmB-I1oVl3aDPUCn4_ferIT2-sEnPAsgr2nYi0SQwAjInuKDN8Z30A-ZzD8g3HSkTQ4CRZHSxsS_o"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Coming Soon: Product Showcase -->
+<section class="py-section-gap bg-surface" id="cookies">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-20">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4">The Winter Collection</h2>
+<div class="w-24 h-px bg-primary mx-auto"></div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-6 uppercase tracking-widest">Coming Soon to Millaura</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product Card 1 -->
+<div class="bg-graphite group p-1 transition-all duration-500 hover:-translate-y-2 shadow-2xl shadow-black/50">
+<div class="border border-primary/10 p-6 h-full flex flex-col">
+<div class="aspect-square bg-obsidian overflow-hidden mb-8">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv0Ni47vtYI0LgnkL0zM-l6FKtFEdQOaTQ4IrflQSxFDnzEtTF3hXILo4SuC9Q2uK7PAvkTvh0W3UgiQ9SFDGwC9SfVxgRhksp9F_6RO5Z6uQ6WRwsjL5JyT4S2U7h_6T8D2RQYsofdOMJeO_YZNFYRpw_cPr0TutSbN8EZH1EjWSi3s5ZZxZ5huj0F-gs3Oza4NFQFzNapR3KkTQBuS3Coux7FRwF9YCr55jNMifg7tuBUZzyPXTZV6i9sPUI382GpPyzzq1WUu6r"/>
+</div>
+<div class="flex-grow">
+<span class="font-label-caps text-label-caps text-primary/60 mb-2 block uppercase">Artisanal</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Classic Millet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/80 line-clamp-2">Our signature blend of foxtail millet and organic clarified butter.</p>
+</div>
+<div class="mt-8 pt-6 border-t border-primary/5 flex items-center justify-between">
+<a class="font-label-caps text-label-caps text-on-surface-variant/40 hover:text-primary transition-colors" href="mailto:orders@millaurabakers.com?subject=Waitlist: Classic Millet">Waitlist Open</a>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-graphite group p-1 transition-all duration-500 hover:-translate-y-2 shadow-2xl shadow-black/50 border-t-2 border-primary">
+<div class="border border-primary/10 p-6 h-full flex flex-col">
+<div class="aspect-square bg-obsidian overflow-hidden mb-8">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYooIZVu_ufPsphHifJg0GWOYEmEDAKwSC3aaEFEaGP6_5s5_dX6VxybUrmbuTo-SPXH3OcMCzNdjjAEcvU9tHMfxVHwRHTu31YHNDyZb7XhHCbJXq42SXcqrl7evIY8r6y0EgKwGicf_GrzG3SKSDOqllhQv4tGyvZXjHFa3K-ZL9TaZL5TOO0QGNDRekjQZCm50DV-nSH-6GRXTV4NmevzWYou7NJSu4663sLvVxFy3GW8qWD0PzHH4iT2vdRLVPUi7u-l1gywJp"/>
+</div>
+<div class="flex-grow">
+<span class="font-label-caps text-label-caps text-primary mb-2 block uppercase italic">Selection Choice</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Oat &amp; Millet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/80 line-clamp-2">Slow-baked grains with a whisper of wild forest honey.</p>
+</div>
+<div class="mt-8 pt-6 border-t border-primary/5 flex items-center justify-between">
+<a class="font-label-caps text-label-caps text-on-surface-variant/40 hover:text-primary transition-colors" href="mailto:orders@millaurabakers.com?subject=Inquiry: Oat &amp; Millet">Limited Batch</a>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-graphite group p-1 transition-all duration-500 hover:-translate-y-2 shadow-2xl shadow-black/50">
+<div class="border border-primary/10 p-6 h-full flex flex-col">
+<div class="aspect-square bg-obsidian overflow-hidden mb-8">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyYIbACeirD0s1hlP6WkzsBRcKmY0OG1-PXz5VNzL_AhBr0KjIpME_bRbMf02e4EWWMEPvrF6gcbLb3dJmLS5tQX2tWpDafYwXj_e_jIfswmheNSJRcUXj67TZqEpA1gbm298LvVXc511wWX3mjRTawLxrtKvQ3adAx47lLxdoSIe2QLHoY-cPZuXCxLnqKMg0DntGZWiaVeYYGE2SW2am_Ohjwtq01tcQU7LPSILMV3FK_Zks8n6YkJ01rCX8l0LUP4qUaLrQCvWu"/>
+</div>
+<div class="flex-grow">
+<span class="font-label-caps text-label-caps text-primary/60 mb-2 block uppercase">Heritage</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Spiced Millet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/80 line-clamp-2">Infused with rare spices from the Malabar coast.</p>
+</div>
+<div class="mt-8 pt-6 border-t border-primary/5 flex items-center justify-between">
+<a class="font-label-caps text-label-caps text-on-surface-variant/40 hover:text-primary transition-colors" href="mailto:orders@millaurabakers.com?subject=Waitlist: Spiced Millet">Waitlist Open</a>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-graphite group p-1 transition-all duration-500 hover:-translate-y-2 shadow-2xl shadow-black/50">
+<div class="border border-primary/10 p-6 h-full flex flex-col">
+<div class="aspect-square bg-obsidian overflow-hidden mb-8">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdkUhgzMQ_EJYFPRjTKQu0wmqt6aWnBuCrhGdKMlNl_owIE8OzHCiCmegY7t3m-LXBnXrXP24sjM3x-xo2zcMdN7tpB696XH_RdZjJWsVAQiyKFYKuXkLmEr7dYK_1b8ZuTl8Vfmy9JcGKAozkRuKcDjMY4GvqFTTXK0IhqiEYrufrkgC7h3WkrWSNNDNFAsAEItVHpUlkSjKA-LDyrbFsc-kDn8CgsEYW2AET14DiYfGaSq4dmYBMWQ52zoyakolBiy4isN5W_Ezi"/>
+</div>
+<div class="flex-grow">
+<span class="font-label-caps text-label-caps text-primary/60 mb-2 block uppercase">Reserve</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Double Choco</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/80 line-clamp-2">70% dark cocoa nibs folded into a rich pearl millet dough.</p>
+</div>
+<div class="mt-8 pt-6 border-t border-primary/5 flex items-center justify-between">
+<a class="font-label-caps text-label-caps text-on-surface-variant/40 hover:text-primary transition-colors" href="mailto:orders@millaurabakers.com?subject=Order Inquiry: Double Choco Reserve">Exclusive</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Story Section -->
+<section class="py-section-gap bg-obsidian relative overflow-hidden" id="heritage">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-section-gap items-center">
+<div class="md:col-span-5 relative">
+<div class="absolute -top-10 -left-10 w-40 h-40 border-t border-l border-primary/20"></div>
+<img class="w-full h-auto grayscale shadow-2xl relative z-10" data-alt="Artisan baker's hands working with dough" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpzzZmdk9frPuVId4BCBvzfEkrCIj1eJwVUgQNCPFY8Velyb8zyjs-Jue-Knnj0dQQuOQwTC9wM-_c7HWMeTrAWK4a-kOJvDOc0hPWGotIuoKz4DKZ0GiQV31HFIO9faQ1SRlXWnYQZbX53OphTFPriLq42-vxX-kzH6heM8LyFD7V-h8aSpc1JKySWgpInyGF-cSlovJkqqjGDPFxSzMTZmK12F-is4W7IZ7Zujh1xSW7jNLGIvoNE-0kJaOtJzCQZ5OycdAMO3Se"/>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 border-b border-r border-primary/20"></div>
+</div>
+<div class="md:col-span-7">
+<p class="font-label-caps text-label-caps text-primary mb-6">OUR HERITAGE</p>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-10 leading-tight">From the Heart of Anand</h2>
+<div class="space-y-8">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic">
+                        "At Millaura, we believe that the most profound luxuries are those rooted in the earth. Our journey began in the vibrant landscapes of Anand, where we rediscovered the quiet resilience of millets."
+                    </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Every cookie is a testament to precision and passion. We bypass modern industrial shortcuts, favoring the slow, rhythmic traditions of our ancestors. It is not just about baking; it is about honoring a legacy of health and handcrafted excellence that resonates with the discerning palate of today.
+                    </p>
+<div class="pt-10">
+<div class="signature text-primary text-3xl mb-2">The Millaura Family</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant/60 uppercase tracking-widest">Master Bakers &amp; Founders</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Menu/Highlights -->
+<section class="py-section-gap bg-surface" id="gifting">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
+<!-- Bento Item 1 -->
+<div class="md:col-span-2 md:row-span-2 bg-graphite p-10 flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div>
+<h3 class="font-headline-lg text-headline-lg-mobile text-primary mb-6">Sustainable Luxury</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md leading-relaxed">
+                            Our millets are sourced from small-scale regenerative farms, ensuring every bite supports both your health and the environment. We believe elegance should be ethical.
+                        </p>
+</div>
+<div class="mt-20">
+<div class="flex items-center space-x-4 mb-4">
+<span class="font-headline-md text-headline-md text-on-surface">94%</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Reduced Water Usage</span>
+</div>
+<div class="w-full bg-outline-variant h-px">
+<div class="bg-primary h-px w-3/4"></div>
+</div>
+</div>
+</div>
+<!-- Bento Item 2 -->
+<div class="bg-graphite p-8 border-t-4 border-primary shadow-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">workspace_premium</span>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-4">Gold Grade</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Only the top 5% of harvested millets pass our rigorous quality control for the Reserve collection.</p>
+</div>
+<!-- Bento Item 3 -->
+<div class="bg-obsidian border border-primary/20 p-8 group hover:border-primary/50 transition-colors">
+<h4 class="font-headline-md text-headline-md text-primary mb-4 italic">Bespoke Gifting</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Curate a selection for those who appreciate the finer things.</p>
+<a class="font-label-caps text-label-caps text-on-surface flex items-center gap-2 group-hover:translate-x-2 transition-transform" href="mailto:orders@millaurabakers.com?subject=Bespoke Gifting Inquiry">
+                        Inquire Now <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Locate Section -->
+<section class="py-section-gap bg-obsidian" id="locate">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-6">Visit Our Bakery</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+        Experience the aroma of freshly baked heritage in the heart of Anand, Gujarat.
+    </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="bg-graphite p-10 border border-primary/10">
+<span class="material-symbols-outlined text-primary text-5xl mb-6">location_on</span>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-4">Flagship Store</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Anand, Gujarat, India</p>
+<div class="flex flex-col gap-4 items-center">
+<a class="flex items-center gap-3 bg-primary text-on-primary-container px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:brightness-110 transition-all" href="https://wa.me/910000000000" target="_blank">
+<span class="material-symbols-outlined">chat</span> Chat with us on WhatsApp
+                </a>
+</div>
+</div>
+<div class="h-80 bg-surface-container border border-primary/10 relative flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden">
+<div class="absolute inset-0 bg-primary/5"></div>
+<p class="relative z-10 font-label-caps text-label-caps text-primary">Map Preview - Visit Us in Anand</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-dim dark:bg-surface-dim border-t border-outline-variant/20 w-full pt-section-gap-sm pb-10">
+<div class="max-w-container-max mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left py-20">
+<!-- Brand Column -->
+<div>
+<div class="h-16 w-auto mb-6"><img alt="Millaura Bakers Logo" class="h-full w-auto object-contain md:mx-0 mx-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZNyXPy-GoIkZF9xqmTyrjfWwtWD4Intt1uY-vxZwbF60nUU2-XUMThmld72AVwJcJPQZ7V1De4ytQ_9h1oqe04SLq6lxstjI6N1D8KQajmuxiQlQoUIE-SvXNDgSTuioBEhhmVs4yhGOb9O07TySUxACcZWqwht6LvqygNrJNIiGqttgl6ZoLIon_Sm7ocdhltZzFR6qdEW3lf3Q-z_lSVoiyKV8O_ZverjvefDhgrehDmIIBMqKvNazlDrxII2t8qaY6A1ZvElkc"/></div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 leading-relaxed">
+                    Crafting heritage-rich, artisanal millet cookies for the modern epicurean. Experience the prestige of nature's finest grains.
+                </p>
+<div class="flex justify-center md:justify-start space-x-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="mailto:support@millaurabakers.com"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<!-- Links Column -->
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h5 class="font-label-caps text-label-caps text-primary mb-6 uppercase tracking-widest">Discovery</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="#cookies">Cookies</a></li>
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="#heritage">Heritage</a></li>
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="#locate">Locate</a></li>
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="mailto:support@millaurabakers.com">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-caps text-label-caps text-primary mb-6 uppercase tracking-widest">Legal</h5>
+<ul class="space-y-4">
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="#">Privacy Policy</a></li>
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="#">Terms of Service</a></li>
+<li class=""><a class="font-body-md text-body-md text-on-surface-variant hover:text-tertiary transition-colors" href="#">Shipping</a></li>
+</ul>
+</div>
+</div>
+<!-- Newsletter Column -->
+<div class="flex flex-col items-center md:items-end">
+<h5 class="font-label-caps text-label-caps text-primary mb-6 uppercase tracking-widest">The Inner Circle</h5>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 text-center md:text-right">Be the first to receive invitation-only releases.</p>
+<div class="w-full max-w-xs relative">
+<input class="w-full bg-transparent border-b border-outline-variant py-3 font-label-caps text-label-caps text-on-surface focus:outline-none focus:border-primary transition-colors placeholder:text-on-surface-variant/30" placeholder="YOUR EMAIL ADDRESS" type="email"/>
+<button class="absolute right-0 bottom-3 text-primary">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-6 pt-10 border-t border-outline-variant/10 text-center">
+<p class="font-body-standard text-body-standard text-on-surface-variant opacity-40 mb-2">© 2026 Millaura Bakers. Crafted in Anand.</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant/30 uppercase tracking-[0.2em]">Millaura Bakers is a registered trademark</p>
+</div>
+</footer>
+<script>
+        // Micro-interaction for smooth scrolling and header fade
+        document.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-surface-elevated/95', 'py-3');
+                nav.classList.remove('bg-surface-elevated/80', 'py-4');
+            } else {
+                nav.classList.add('bg-surface-elevated/80', 'py-4');
+                nav.classList.remove('bg-surface-elevated/95', 'py-3');
+            }
+        });
+
+        // Add a parallax-ish movement to the hero cookie
+        const heroImg = document.querySelector('.group img');
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            if(heroImg) heroImg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+        });
+    </script>
+</body></html>
