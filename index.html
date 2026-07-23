@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Millaura Bakers – Handcrafted Millet Cookies</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --brown: #3b1f0a;
+  --caramel: #c47c2b;
+  --gold: #e09f3e;
+  --cream: #fdf8f0;
+  --warm: #f5ede0;
+  --muted: #8a6040;
+  --bg-dark: #1a0d04;
+  --bg-dark-2: #241206;
+}
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-dark);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ───────────────────── Ambient background ───────────────────── */
+.bg-canvas { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+.bg-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.float-item { animation: floatDrift linear infinite; transform-origin: center; }
+@keyframes floatDrift {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  5% { opacity: 0.14; }
+  95% { opacity: 0.1; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+.overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(36,18,6,0.2) 0%, rgba(26,13,4,0.9) 75%);
+  z-index: 1; pointer-events: none;
+}
+
+/* ───────────────────── Nav ───────────────────── */
+header.site-nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px clamp(20px, 5vw, 64px);
+  background: rgba(26,13,4,0.7);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(224,159,62,0.15);
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-brand img { height: 44px; width: 44px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); }
+.nav-brand-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; line-height: 1.15; color: var(--cream); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: rgba(253,248,240,0.75); text-decoration: none; font-size: 13px;
+  letter-spacing: 0.5px; font-weight: 500; position: relative; padding-bottom: 4px;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+  background: var(--gold); transition: width 0.25s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--cream); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-cta {
+  display: inline-flex; align-items: center; padding: 9px 20px; border-radius: 100px;
+  border: 1px solid rgba(224,159,62,0.4); color: var(--gold); font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; text-decoration: none; transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--caramel); color: #fff; border-color: var(--caramel); }
+@media (max-width: 780px) { .nav-links { display: none; } }
+
+/* ───────────────────── Hero ───────────────────── */
+.hero {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  max-width: 1180px; margin: 0 auto;
+  padding: clamp(40px, 8vw, 90px) clamp(20px, 5vw, 40px) clamp(60px, 8vw, 100px);
+  perspective: 1400px;
+}
+.hero-copy { flex: 1 1 440px; max-width: 480px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px; animation: fadeUp 0.9s ease both;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.hero-copy h1 {
+  font-family: 'Playfair Display', serif; font-weight: 800; letter-spacing: -1px;
+  font-size: clamp(38px, 5.5vw, 58px); line-height: 1.06; color: var(--cream);
+  animation: fadeUp 0.9s 0.1s ease both;
+}
+.hero-copy h1 em { color: var(--gold); font-style: italic; }
+.hero-copy .sub {
+  margin-top: 18px; font-size: 15.5px; font-weight: 300; color: rgba(253,248,240,0.65);
+  line-height: 1.75; max-width: 380px; animation: fadeUp 0.9s 0.2s ease both;
+}
+.hero-cta { margin-top: 32px; display: flex; gap: 16px; align-items: center; animation: fadeUp 0.9s 0.3s ease both; }
+.btn-primary {
+  background: var(--caramel); color: #fff; border: none; border-radius: 100px;
+  padding: 15px 32px; font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
+  box-shadow: 0 12px 30px -8px rgba(196,124,43,0.55), 0 2px 0 rgba(255,255,255,0.15) inset;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -8px rgba(196,124,43,0.7), 0 2px 0 rgba(255,255,255,0.15) inset; }
+.btn-ghost {
+  color: var(--cream); text-decoration: none; font-size: 12.5px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(253,248,240,0.3);
+  padding-bottom: 3px; transition: border-color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Hero 3D cookie stage */
+.hero-stage {
+  flex: 1 1 380px; position: relative; height: clamp(300px, 40vw, 420px);
+  display: flex; align-items: center; justify-content: center;
+  transform-style: preserve-3d;
+  animation: fadeUp 1s 0.15s ease both;
+}
+.hero-stage-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+.cookie-jump {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  animation: cookieJump 2.6s cubic-bezier(.45,0,.55,1) infinite;
+  transform-origin: center bottom;
+}
+@keyframes cookieJump {
+  0%   { transform: translateY(0) scale(1, 1); }
+  12%  { transform: translateY(-10px) scale(1.06, 0.94); }
+  30%  { transform: translateY(-52px) scale(0.95, 1.06) rotate(-3deg); }
+  50%  { transform: translateY(-62px) scale(0.94, 1.08) rotate(0deg); }
+  70%  { transform: translateY(-52px) scale(0.95, 1.06) rotate(3deg); }
+  88%  { transform: translateY(-6px) scale(1.08, 0.9); }
+  94%  { transform: translateY(2px) scale(1.1, 0.86); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+.cookie-shadow {
+  position: absolute; left: 50%; bottom: 6%; width: 58%; height: 22px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 72%);
+  transform: translateX(-50%);
+  animation: shadowPulse 2.6s cubic-bezier(.45,0,.55,1) infinite;
+}
+@keyframes shadowPulse {
+  0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.25; transform: translateX(-50%) scale(0.6); }
+}
+.hero-glow {
+  position: absolute; inset: 6%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(224,159,62,0.28) 0%, transparent 68%);
+  filter: blur(6px);
+}
+.hero-cookie-svg { position: relative; width: 100%; height: 100%; }
+
+/* Orbiting chocolate + millet accents */
+.orbit { position: absolute; inset: 0; animation: orbitSpin linear infinite; }
+.orbit-item {
+  position: absolute; top: 50%; left: 50%;
+  animation: orbitCounter linear infinite;
+}
+@keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbitCounter { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
+
+/* ───────────────────── Best sellers ───────────────────── */
+section.best-sellers { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 20px 24px 100px; }
+.section-head { text-align: center; margin-bottom: 44px; }
+.section-head .eyebrow { justify-content: center; }
+.section-head .eyebrow::after { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.section-head h2 {
+  font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 36px); font-weight: 700;
+  color: var(--cream); margin-top: 10px;
+}
+
+.product-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+  perspective: 1200px;
+}
+@media (max-width: 900px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .product-grid { grid-template-columns: 1fr; } }
+
+.product-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  border: 1px solid rgba(224,159,62,0.16);
+  border-radius: 20px; padding: 22px 20px 24px;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 20px 40px -24px rgba(0,0,0,0.6);
+}
+.product-card:hover {
+  border-color: rgba(224,159,62,0.45);
+  box-shadow: 0 30px 50px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(224,159,62,0.2) inset;
+}
+.product-thumb {
+  position: relative; height: 150px; border-radius: 14px; margin-bottom: 16px;
+  background: radial-gradient(circle at 50% 35%, rgba(224,159,62,0.14), rgba(0,0,0,0.25));
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  transform: translateZ(28px);
+}
+.product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product-card h3 {
+  font-family: 'Playfair Display', serif; font-size: 15.5px; font-weight: 700; color: var(--cream);
+  margin-bottom: 6px; transform: translateZ(18px);
+}
+.coming-soon-pill {
+  display: inline-flex; align-items: center; gap: 6px; width: 100%; justify-content: center;
+  background: rgba(224,159,62,0.08); border: 1px solid rgba(224,159,62,0.3); color: var(--gold);
+  border-radius: 100px; padding: 10px; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; transform: translateZ(18px);
+}
+.coming-soon-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+/* ───────────────────── Our Story ───────────────────── */
+section.our-story { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; padding: 20px 24px 110px; text-align: center; }
+.our-story p.lede {
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(19px, 2.4vw, 24px);
+  color: var(--cream); line-height: 1.6; margin-bottom: 26px;
+}
+.our-story p.body-copy {
+  font-size: 14.5px; font-weight: 300; color: rgba(253,248,240,0.65); line-height: 1.9;
+  max-width: 640px; margin: 0 auto 18px;
+}
+.our-story .signature { margin-top: 26px; font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); font-size: 15px; }
+
+/* ───────────────────── Footer ───────────────────── */
+footer {
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(224,159,62,0.15);
+  padding: 40px 24px 32px; text-align: center;
+}
+footer p { font-size: 11px; font-weight: 300; letter-spacing: 1px; color: rgba(253,248,240,0.35); line-height: 2; }
+footer a { color: rgba(253,248,240,0.5); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, .float-item, .hero-stage-inner, .crumb { animation: none !important; transition: none !important; }
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient floating background (same motif as before) -->
+<div class="bg-canvas">
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <g id="cookieDot"><circle r="20" fill="#c47c2b" opacity="0.9"/><circle cx="-6" cy="-6" r="3" fill="#5c2e00" opacity="0.7"/><circle cx="7" cy="-3" r="2.4" fill="#5c2e00" opacity="0.7"/><circle cx="-1" cy="7" r="2.6" fill="#5c2e00" opacity="0.7"/></g>
+      <g id="starDot"><path d="M0,-9 L1.6,-1.6 L9,0 L1.6,1.6 L0,9 L-1.6,1.6 L-9,0 L-1.6,-1.6Z" fill="#e09f3e" opacity="0.6"/></g>
+    </defs>
+    <use href="#cookieDot" x="80" y="0" class="float-item" style="animation-duration:20s; animation-delay:0s"/>
+    <use href="#starDot" x="240" y="0" class="float-item" style="animation-duration:15s; animation-delay:3s"/>
+    <use href="#cookieDot" x="420" y="0" class="float-item" style="animation-duration:22s; animation-delay:7s"/>
+    <use href="#starDot" x="600" y="0" class="float-item" style="animation-duration:14s; animation-delay:1s"/>
+    <use href="#cookieDot" x="780" y="0" class="float-item" style="animation-duration:19s; animation-delay:9s"/>
+    <use href="#starDot" x="960" y="0" class="float-item" style="animation-duration:16s; animation-delay:5s"/>
+    <use href="#cookieDot" x="1120" y="0" class="float-item" style="animation-duration:21s; animation-delay:12s"/>
+    <use href="#starDot" x="150" y="0" class="float-item" style="animation-duration:13s; animation-delay:8s"/>
+    <use href="#cookieDot" x="1000" y="0" class="float-item" style="animation-duration:24s; animation-delay:2s"/>
+  </svg>
+</div>
+<div class="overlay"></div>
+
+<!-- Nav -->
+<header class="site-nav">
+  <div class="nav-brand">
+    <img src="millaura-logo.png" alt="Millaura Bakers logo"/>
+    <div class="nav-brand-text">Millaura<br>Bakers</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:support@millaurabakers.com?subject=Notify%20me%20when%20Millaura%20Bakers%20launches">Notify Me</a>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <span class="eyebrow">Coming Soon · Anand, Gujarat</span>
+    <h1>Handcrafted<br><em>Millet</em> Cookies</h1>
+    <p class="sub">We're kneading, baking and perfecting every recipe before we open our doors. Not for sale just yet — but we'd love to have you along for the journey.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" style="text-decoration:none; display:inline-block;" href="mailto:support@millaurabakers.com?subject=Notify%20me%20when%20Millaura%20Bakers%20launches">Notify Me at Launch</a>
+      <a href="#menu" class="btn-ghost">See What's Baking</a>
+    </div>
+  </div>
+
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-stage-inner" id="heroStageInner">
+      <div class="hero-glow"></div>
+      <div class="cookie-shadow"></div>
+
+      <!-- orbiting chocolate drop -->
+      <div class="orbit" style="animation-duration: 9s;">
+        <div class="orbit-item" style="animation-duration: 9s; transform: translate(-50%,-50%) translateX(150px);">
+          <svg width="34" height="34" viewBox="0 0 34 34"><path d="M17 3c6 8 11 13 11 18a11 11 0 1 1-22 0c0-5 5-10 11-18Z" fill="#3b1f0a"/><ellipse cx="14" cy="17" rx="2.4" ry="3.4" fill="#7a5230" opacity="0.6"/></svg>
+        </div>
+      </div>
+      <!-- orbiting millet grain cluster -->
+      <div class="orbit" style="animation-duration: 12s; animation-direction: reverse;">
+        <div class="orbit-item" style="animation-duration: 12s; animation-direction: reverse; transform: translate(-50%,-50%) translateX(140px) translateY(60px);">
+          <svg width="40" height="24" viewBox="0 0 40 24"><ellipse cx="8" cy="12" rx="6" ry="3.2" fill="#e6c27a" transform="rotate(-20 8 12)"/><ellipse cx="19" cy="8" rx="6" ry="3.2" fill="#e6c27a" transform="rotate(10 19 8)"/><ellipse cx="30" cy="14" rx="6" ry="3.2" fill="#e6c27a" transform="rotate(-8 30 14)"/></svg>
+        </div>
+      </div>
+
+      <div class="cookie-jump">
+        <svg class="hero-cookie-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
+          <defs>
+            <radialGradient id="cookieGrad" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#e0a24a"/>
+              <stop offset="55%" stop-color="#c47c2b"/>
+              <stop offset="100%" stop-color="#9a5f1e"/>
+            </radialGradient>
+          </defs>
+          <!-- cookie body -->
+          <circle cx="160" cy="160" r="112" fill="url(#cookieGrad)"/>
+          <circle cx="160" cy="160" r="112" fill="none" stroke="#e8bf7a" stroke-width="2" opacity="0.35"/>
+          <!-- chocolate drizzle -->
+          <path d="M60,100 Q120,80 150,120 T260,110" stroke="#3b1f0a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+          <path d="M50,160 Q110,190 170,150 T270,170" stroke="#3b1f0a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+          <path d="M70,220 Q130,240 190,205 T255,225" stroke="#3b1f0a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+          <!-- choc chips -->
+          <circle cx="110" cy="120" r="9" fill="#3b1f0a"/>
+          <circle cx="200" cy="105" r="7" fill="#3b1f0a"/>
+          <circle cx="130" cy="180" r="8" fill="#3b1f0a"/>
+          <circle cx="215" cy="185" r="6" fill="#3b1f0a"/>
+          <circle cx="95" cy="200" r="6" fill="#3b1f0a"/>
+          <circle cx="185" cy="230" r="7" fill="#3b1f0a"/>
+          <!-- millet flecks -->
+          <ellipse cx="150" cy="150" rx="3" ry="1.6" fill="#f4d9a3" opacity="0.8"/>
+          <ellipse cx="175" cy="165" rx="3" ry="1.6" fill="#f4d9a3" opacity="0.8" transform="rotate(30 175 165)"/>
+          <ellipse cx="120" cy="165" rx="3" ry="1.6" fill="#f4d9a3" opacity="0.8" transform="rotate(-20 120 165)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Coming soon menu -->
+<section class="best-sellers" id="menu">
+  <div class="section-head">
+    <span class="eyebrow">Coming Soon To Our Menu</span>
+    <h2>Baked With Millets, Made For You</h2>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Card 1: Classic Millet Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://images.unsplash.com/photo-1639678114429-a915fdb55000?w=500&q=80&auto=format&fit=crop" alt="Classic Millet Cookie" loading="lazy"/>
+      </div>
+      <h3>Classic Millet Cookie</h3>
+      <span class="coming-soon-pill">Coming Soon</span>
+    </div>
+
+    <!-- Card 2: Healthy Oat & Millet Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://images.unsplash.com/photo-1497051788611-2c64812349fa?w=500&q=80&auto=format&fit=crop" alt="Healthy Oat &amp; Millet Cookie" loading="lazy"/>
+      </div>
+      <h3>Healthy Oat &amp; Millet Cookie</h3>
+      <span class="coming-soon-pill">Coming Soon</span>
+    </div>
+
+    <!-- Card 3: Handcrafted Spiced Millet Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://images.unsplash.com/photo-1509460711270-4affad6eef6a?w=500&q=80&auto=format&fit=crop" alt="Handcrafted Spiced Millet Cookie" loading="lazy"/>
+      </div>
+      <h3>Handcrafted Spiced Millet Cookie</h3>
+      <span class="coming-soon-pill">Coming Soon</span>
+    </div>
+
+    <!-- Card 4: Millets Based Double Chocolate Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <img src="https://images.unsplash.com/photo-1495085570317-992279e0c33d?w=500&q=80&auto=format&fit=crop" alt="Millets Based Double Chocolate Cookie" loading="lazy"/>
+      </div>
+      <h3>Millets Based Double Chocolate Cookie</h3>
+      <span class="coming-soon-pill">Coming Soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- Our Story -->
+<section class="our-story" id="story">
+  <div class="section-head">
+    <span class="eyebrow">Our Story</span>
+    <h2>From the Heart of Anand</h2>
+  </div>
+  <p class="lede">"Millaura" was born from two words we hold dear — millets, the grain our grandmothers swore by, and aura, the warmth a home kitchen leaves on everyone who walks through the door.</p>
+  <p class="body-copy">We're baking out of Anand, Gujarat — a town better known for its milk than its millets, but one that taught us the same lesson either way: real nourishment is never rushed. Long before "wellness" was a trend, our families were grinding bajra and jowar by hand, turning humble grains into something that felt like a hug on a plate.</p>
+  <p class="body-copy">Millaura Bakers is our attempt to carry that feeling forward — recipes tested in a home kitchen, shared with neighbours before anyone else, refined one batch at a time until they tasted like the ones we grew up on. We're not open yet. We're still in that kitchen, getting it right, because Anand raised us to believe a cookie is worth doing properly.</p>
+  <p class="signature">— With love, from our kitchen to yours</p>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <p>
+    <a href="mailto:support@millaurabakers.com">support@millaurabakers.com</a> &nbsp;·&nbsp; Anand, Gujarat, India
+  </p>
+  <p style="margin-top:8px;">
+    Coming soon — Millaura Bakers is a registered trademark. &nbsp;·&nbsp; &copy; 2026 Millaura Bakers. All rights reserved.
+  </p>
+</footer>
+
+<script>
+// ── 3D tilt for hero cookie, following the cursor ──
+const heroStage = document.getElementById('heroStage');
+const heroInner = document.getElementById('heroStageInner');
+if (heroStage && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  heroStage.addEventListener('mousemove', (e) => {
+    const rect = heroStage.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    heroInner.style.transform = `rotateY(${px * 22}deg) rotateX(${-py * 22}deg)`;
+  });
+  heroStage.addEventListener('mouseleave', () => {
+    heroInner.style.transform = '';
+  });
+}
+
+// ── 3D tilt for product cards ──
+document.querySelectorAll('.product-card').forEach(card => {
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${px * 10}deg) rotateX(${-py * 10}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ── Apple-style scroll parallax: hero cookie fades/rotates/scales as you scroll past it ──
+const heroSection = document.getElementById('home');
+if (heroSection && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const rect = heroSection.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / (rect.height * 0.9), 0), 1);
+      heroStage.style.opacity = 1 - progress * 0.7;
+      heroStage.style.transform = `translateY(${progress * 40}px) scale(${1 - progress * 0.12})`;
+      ticking = false;
+    });
+  }, { passive: true });
+}
+</script>
+</body>
+</html>
