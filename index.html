@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Millaura Bakers – Handcrafted Millet Cookies</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --brown: #3b1f0a;
+  --caramel: #c47c2b;
+  --gold: #e09f3e;
+  --cream: #fdf8f0;
+  --warm: #f5ede0;
+  --muted: #8a6040;
+  --bg-dark: #1a0d04;
+  --bg-dark-2: #241206;
+}
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-dark);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ───────────────────── Ambient background ───────────────────── */
+.bg-canvas { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+.bg-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.float-item { animation: floatDrift linear infinite; transform-origin: center; }
+@keyframes floatDrift {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  5% { opacity: 0.14; }
+  95% { opacity: 0.1; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+.overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(36,18,6,0.2) 0%, rgba(26,13,4,0.9) 75%);
+  z-index: 1; pointer-events: none;
+}
+
+/* ───────────────────── Nav ───────────────────── */
+header.site-nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px clamp(20px, 5vw, 64px);
+  background: rgba(26,13,4,0.7);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(224,159,62,0.15);
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-brand img { height: 44px; width: 44px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); }
+.nav-brand-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; line-height: 1.15; color: var(--cream); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: rgba(253,248,240,0.75); text-decoration: none; font-size: 13px;
+  letter-spacing: 0.5px; font-weight: 500; position: relative; padding-bottom: 4px;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+  background: var(--gold); transition: width 0.25s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--cream); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-cart {
+  width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(224,159,62,0.35); color: var(--gold); cursor: pointer; position: relative;
+  transition: all 0.2s;
+}
+.nav-cart:hover { background: rgba(196,124,43,0.15); border-color: var(--gold); }
+.cart-badge {
+  position: absolute; top: -4px; right: -4px; background: var(--caramel); color: #fff;
+  font-size: 9px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 780px) { .nav-links { display: none; } }
+
+/* ───────────────────── Hero ───────────────────── */
+.hero {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  max-width: 1180px; margin: 0 auto;
+  padding: clamp(40px, 8vw, 90px) clamp(20px, 5vw, 40px) clamp(60px, 8vw, 100px);
+  perspective: 1400px;
+}
+.hero-copy { flex: 1 1 440px; max-width: 480px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px; animation: fadeUp 0.9s ease both;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.hero-copy h1 {
+  font-family: 'Playfair Display', serif; font-weight: 800; letter-spacing: -1px;
+  font-size: clamp(38px, 5.5vw, 58px); line-height: 1.06; color: var(--cream);
+  animation: fadeUp 0.9s 0.1s ease both;
+}
+.hero-copy h1 em { color: var(--gold); font-style: italic; }
+.hero-copy .sub {
+  margin-top: 18px; font-size: 15.5px; font-weight: 300; color: rgba(253,248,240,0.65);
+  line-height: 1.75; max-width: 380px; animation: fadeUp 0.9s 0.2s ease both;
+}
+.hero-cta { margin-top: 32px; display: flex; gap: 16px; align-items: center; animation: fadeUp 0.9s 0.3s ease both; }
+.btn-primary {
+  background: var(--caramel); color: #fff; border: none; border-radius: 100px;
+  padding: 15px 32px; font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
+  box-shadow: 0 12px 30px -8px rgba(196,124,43,0.55), 0 2px 0 rgba(255,255,255,0.15) inset;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -8px rgba(196,124,43,0.7), 0 2px 0 rgba(255,255,255,0.15) inset; }
+.btn-ghost {
+  color: var(--cream); text-decoration: none; font-size: 12.5px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(253,248,240,0.3);
+  padding-bottom: 3px; transition: border-color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Hero 3D cookie stage */
+.hero-stage {
+  flex: 1 1 380px; position: relative; height: clamp(300px, 40vw, 420px);
+  display: flex; align-items: center; justify-content: center;
+  transform-style: preserve-3d;
+  animation: fadeUp 1s 0.15s ease both;
+}
+.hero-stage-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  animation: heroBob 6s ease-in-out infinite;
+}
+@keyframes heroBob {
+  0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+  50% { transform: translateY(-14px) rotateZ(1.2deg); }
+}
+.hero-glow {
+  position: absolute; inset: 6%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(224,159,62,0.28) 0%, transparent 68%);
+  filter: blur(6px);
+}
+.hero-cookie-svg { position: relative; width: 100%; height: 100%; }
+.crumb { animation: crumbDrift ease-in-out infinite; transform-origin: center; }
+@keyframes crumbDrift {
+  0%, 100% { transform: translate(0,0) rotate(0deg); opacity: 0.85; }
+  50% { transform: translate(var(--dx,6px), var(--dy,-10px)) rotate(25deg); opacity: 1; }
+}
+
+/* ───────────────────── Best sellers ───────────────────── */
+section.best-sellers { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 20px 24px 100px; }
+.section-head { text-align: center; margin-bottom: 44px; }
+.section-head .eyebrow { justify-content: center; }
+.section-head .eyebrow::after { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.section-head h2 {
+  font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 36px); font-weight: 700;
+  color: var(--cream); margin-top: 10px;
+}
+
+.product-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+  perspective: 1200px;
+}
+@media (max-width: 900px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .product-grid { grid-template-columns: 1fr; } }
+
+.product-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  border: 1px solid rgba(224,159,62,0.16);
+  border-radius: 20px; padding: 22px 20px 24px;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 20px 40px -24px rgba(0,0,0,0.6);
+}
+.product-card:hover {
+  border-color: rgba(224,159,62,0.45);
+  box-shadow: 0 30px 50px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(224,159,62,0.2) inset;
+}
+.product-thumb {
+  position: relative; height: 150px; border-radius: 14px; margin-bottom: 16px;
+  background: radial-gradient(circle at 50% 35%, rgba(224,159,62,0.14), rgba(0,0,0,0.25));
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  transform: translateZ(28px);
+}
+.product-thumb svg { width: 96px; height: 96px; filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5)); }
+.product-card h3 {
+  font-family: 'Playfair Display', serif; font-size: 15.5px; font-weight: 700; color: var(--cream);
+  margin-bottom: 6px; transform: translateZ(18px);
+}
+.product-price {
+  font-size: 13px; color: var(--gold); font-weight: 600; margin-bottom: 14px; transform: translateZ(18px);
+}
+.btn-add {
+  width: 100%; background: transparent; border: 1px solid rgba(224,159,62,0.4); color: var(--gold);
+  border-radius: 100px; padding: 11px; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transform: translateZ(18px);
+  transition: all 0.2s;
+}
+.btn-add:hover { background: var(--caramel); color: #fff; border-color: var(--caramel); }
+.btn-add.added { background: var(--brown); color: var(--gold); border-color: var(--brown); }
+
+/* ───────────────────── Footer ───────────────────── */
+footer {
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(224,159,62,0.15);
+  padding: 40px 24px 32px; text-align: center;
+}
+footer p { font-size: 11px; font-weight: 300; letter-spacing: 1px; color: rgba(253,248,240,0.35); line-height: 2; }
+footer a { color: rgba(253,248,240,0.5); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, .float-item, .hero-stage-inner, .crumb { animation: none !important; transition: none !important; }
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient floating background (same motif as before) -->
+<div class="bg-canvas">
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <g id="cookieDot"><circle r="20" fill="#c47c2b" opacity="0.9"/><circle cx="-6" cy="-6" r="3" fill="#5c2e00" opacity="0.7"/><circle cx="7" cy="-3" r="2.4" fill="#5c2e00" opacity="0.7"/><circle cx="-1" cy="7" r="2.6" fill="#5c2e00" opacity="0.7"/></g>
+      <g id="starDot"><path d="M0,-9 L1.6,-1.6 L9,0 L1.6,1.6 L0,9 L-1.6,1.6 L-9,0 L-1.6,-1.6Z" fill="#e09f3e" opacity="0.6"/></g>
+    </defs>
+    <use href="#cookieDot" x="80" y="0" class="float-item" style="animation-duration:20s; animation-delay:0s"/>
+    <use href="#starDot" x="240" y="0" class="float-item" style="animation-duration:15s; animation-delay:3s"/>
+    <use href="#cookieDot" x="420" y="0" class="float-item" style="animation-duration:22s; animation-delay:7s"/>
+    <use href="#starDot" x="600" y="0" class="float-item" style="animation-duration:14s; animation-delay:1s"/>
+    <use href="#cookieDot" x="780" y="0" class="float-item" style="animation-duration:19s; animation-delay:9s"/>
+    <use href="#starDot" x="960" y="0" class="float-item" style="animation-duration:16s; animation-delay:5s"/>
+    <use href="#cookieDot" x="1120" y="0" class="float-item" style="animation-duration:21s; animation-delay:12s"/>
+    <use href="#starDot" x="150" y="0" class="float-item" style="animation-duration:13s; animation-delay:8s"/>
+    <use href="#cookieDot" x="1000" y="0" class="float-item" style="animation-duration:24s; animation-delay:2s"/>
+  </svg>
+</div>
+<div class="overlay"></div>
+
+<!-- Nav -->
+<header class="site-nav">
+  <div class="nav-brand">
+    <img src="millaura-logo.png" alt="Millaura Bakers logo"/>
+    <div class="nav-brand-text">Millaura<br>Bakers</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cart" id="cartIcon" aria-label="Cart">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+    <span class="cart-badge" id="cartCount">0</span>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <span class="eyebrow">Baked with love, made for wellness</span>
+    <h1>Handcrafted<br><em>Millet</em> Cookies</h1>
+    <p class="sub">Baked with passion, healthy by nature — every batch made from real millet, real ingredients, and zero shortcuts.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      <a href="#story" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-stage-inner" id="heroStageInner">
+      <div class="hero-glow"></div>
+      <svg class="hero-cookie-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="cookieGrad" cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#e0a24a"/>
+            <stop offset="55%" stop-color="#c47c2b"/>
+            <stop offset="100%" stop-color="#9a5f1e"/>
+          </radialGradient>
+        </defs>
+        <!-- crumbs -->
+        <g class="crumb" style="--dx:10px; --dy:-14px; animation-duration:5s;"><circle cx="60" cy="70" r="4" fill="#c47c2b"/></g>
+        <g class="crumb" style="--dx:-8px; --dy:-10px; animation-duration:6.5s;"><circle cx="255" cy="90" r="3" fill="#5c2e00"/></g>
+        <g class="crumb" style="--dx:8px; --dy:12px; animation-duration:7s;"><path d="M40,220 L44,206 L52,214 L44,214Z" fill="#e09f3e"/></g>
+        <g class="crumb" style="--dx:-10px; --dy:8px; animation-duration:5.8s;"><circle cx="270" cy="220" r="3.5" fill="#3b1f0a"/></g>
+        <g class="crumb" style="--dx:6px; --dy:-8px; animation-duration:6.2s;"><path d="M280,150 L284,138 L292,146 L284,146Z" fill="#e09f3e"/></g>
+
+        <!-- cookie body -->
+        <circle cx="160" cy="160" r="112" fill="url(#cookieGrad)"/>
+        <circle cx="160" cy="160" r="112" fill="none" stroke="#e8bf7a" stroke-width="2" opacity="0.35"/>
+        <!-- chocolate drizzle -->
+        <path d="M60,100 Q120,80 150,120 T260,110" stroke="#3b1f0a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <path d="M50,160 Q110,190 170,150 T270,170" stroke="#3b1f0a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <path d="M70,220 Q130,240 190,205 T255,225" stroke="#3b1f0a" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <!-- choc chips -->
+        <circle cx="110" cy="120" r="9" fill="#3b1f0a"/>
+        <circle cx="200" cy="105" r="7" fill="#3b1f0a"/>
+        <circle cx="130" cy="180" r="8" fill="#3b1f0a"/>
+        <circle cx="215" cy="185" r="6" fill="#3b1f0a"/>
+        <circle cx="95" cy="200" r="6" fill="#3b1f0a"/>
+        <circle cx="185" cy="230" r="7" fill="#3b1f0a"/>
+        <!-- millet flecks -->
+        <ellipse cx="150" cy="150" rx="3" ry="1.6" fill="#f4d9a3" opacity="0.8"/>
+        <ellipse cx="175" cy="165" rx="3" ry="1.6" fill="#f4d9a3" opacity="0.8" transform="rotate(30 175 165)"/>
+        <ellipse cx="120" cy="165" rx="3" ry="1.6" fill="#f4d9a3" opacity="0.8" transform="rotate(-20 120 165)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Best sellers -->
+<section class="best-sellers" id="shop">
+  <div class="section-head">
+    <span class="eyebrow">Our Best Sellers</span>
+    <h2>Straight From the Oven</h2>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Card 1: Classic Millet Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#c9873a"/><circle cx="38" cy="40" r="4" fill="#3b1f0a"/><circle cx="60" cy="36" r="3.2" fill="#3b1f0a"/><circle cx="46" cy="58" r="3.6" fill="#3b1f0a"/><circle cx="65" cy="55" r="2.8" fill="#3b1f0a"/><circle cx="34" cy="60" r="2.6" fill="#3b1f0a"/></svg>
+      </div>
+      <h3>Classic Millet Cookie</h3>
+      <div class="product-price">$12.00</div>
+      <button class="btn-add" data-name="Classic Millet Cookie">Add to Cart</button>
+    </div>
+
+    <!-- Card 2: Healthy Oat & Millet Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#d8a860"/><ellipse cx="40" cy="42" rx="5" ry="2" fill="#8a6040" transform="rotate(20 40 42)"/><ellipse cx="58" cy="38" rx="5" ry="2" fill="#8a6040" transform="rotate(-15 58 38)"/><ellipse cx="48" cy="58" rx="5" ry="2" fill="#8a6040" transform="rotate(10 48 58)"/><ellipse cx="64" cy="56" rx="4" ry="1.8" fill="#8a6040" transform="rotate(-25 64 56)"/><ellipse cx="34" cy="60" rx="4" ry="1.8" fill="#8a6040" transform="rotate(15 34 60)"/></svg>
+      </div>
+      <h3>Healthy Oat &amp; Millet Cookie</h3>
+      <div class="product-price">$14.00</div>
+      <button class="btn-add" data-name="Healthy Oat &amp; Millet Cookie">Add to Cart</button>
+    </div>
+
+    <!-- Card 3: Handcrafted Spiced Millet Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#b97a3a"/><circle cx="50" cy="50" r="40" fill="none" stroke="#f4d9a3" stroke-width="2" stroke-dasharray="3 4" opacity="0.6"/><circle cx="40" cy="42" r="3.4" fill="#4a2a10"/><circle cx="60" cy="46" r="3" fill="#4a2a10"/><circle cx="48" cy="60" r="3.2" fill="#4a2a10"/><circle cx="62" cy="60" r="2.4" fill="#4a2a10"/></svg>
+      </div>
+      <h3>Handcrafted Spiced Millet Cookie</h3>
+      <div class="product-price">$15.00</div>
+      <button class="btn-add" data-name="Handcrafted Spiced Millet Cookie">Add to Cart</button>
+    </div>
+
+    <!-- Card 4: Millets Based Double Chocolate Cookie -->
+    <div class="product-card">
+      <div class="product-thumb">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#6b4326"/><circle cx="39" cy="40" r="4.6" fill="#241206"/><circle cx="61" cy="38" r="3.8" fill="#241206"/><circle cx="47" cy="58" r="4.2" fill="#241206"/><circle cx="65" cy="57" r="3.2" fill="#241206"/><circle cx="33" cy="58" r="3" fill="#241206"/></svg>
+      </div>
+      <h3>Millets Based Double Chocolate Cookie</h3>
+      <div class="product-price">$16.00</div>
+      <button class="btn-add" data-name="Millets Based Double Chocolate Cookie">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <p>
+    <a href="mailto:support@millaurabakers.com">support@millaurabakers.com</a>
+  </p>
+  <p style="margin-top:8px;">
+    Millaura Bakers is a registered trademark. &nbsp;·&nbsp; &copy; 2026 Millaura Bakers. All rights reserved.
+  </p>
+</footer>
+
+<script>
+// ── 3D tilt for hero cookie, following the cursor ──
+const heroStage = document.getElementById('heroStage');
+const heroInner = document.getElementById('heroStageInner');
+if (heroStage && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  heroStage.addEventListener('mousemove', (e) => {
+    const rect = heroStage.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    heroInner.style.transform = `rotateY(${px * 22}deg) rotateX(${-py * 22}deg)`;
+  });
+  heroStage.addEventListener('mouseleave', () => {
+    heroInner.style.transform = '';
+  });
+}
+
+// ── 3D tilt for product cards ──
+document.querySelectorAll('.product-card').forEach(card => {
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${px * 10}deg) rotateX(${-py * 10}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// ── Simple cart counter (demo only — wire up to real checkout later) ──
+let cartCount = 0;
+const cartCountEl = document.getElementById('cartCount');
+document.querySelectorAll('.btn-add').forEach(btn => {
+  btn.addEventListener('click', () => {
+    cartCount++;
+    cartCountEl.textContent = cartCount;
+    btn.classList.add('added');
+    const original = btn.textContent;
+    btn.textContent = 'Added ✓';
+    setTimeout(() => { btn.textContent = original; btn.classList.remove('added'); }, 1200);
+  });
+});
+</script>
+</body>
+</html>
