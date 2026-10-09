@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error": "#ba1a1a", "surface-container-low": "#f6f3ec", "on-background": "#1c1c18", "primary": "#003b81", "surface-bright": "#fcf9f2", "on-secondary-fixed-variant": "#643f00", "surface-container": "#f0eee7", "tertiary": "#004811", "on-tertiary": "#ffffff", "surface-container-highest": "#e5e2db", "tertiary-fixed-dim": "#8ed88a", "surface-tint": "#255cb1", "tertiary-container": "#196122", "outline": "#737783", "surface-dim": "#dcdad3", "on-error-container": "#93000a", "on-secondary-container": "#6d4400", "on-primary-fixed-variant": "#004493", "outline-variant": "#c3c6d3", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#a9f5a4", "error-container": "#ffdad6", "on-error": "#ffffff", "secondary": "#845400", "on-surface": "#1c1c18", "secondary-fixed-dim": "#ffb95a", "on-primary-container": "#b1c9ff", "on-surface-variant": "#424752", "inverse-primary": "#adc7ff", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#035316", "primary-fixed-dim": "#adc7ff", "on-primary-fixed": "#001a41", "secondary-fixed": "#ffddb6", "secondary-container": "#fdae3b", "inverse-surface": "#31312c", "primary-fixed": "#d8e2ff", "surface-container-high": "#ebe8e1", "background": "#fcf9f2", "on-tertiary-fixed": "#002204", "on-secondary-fixed": "#2a1800", "on-secondary": "#ffffff", "primary-container": "#1552a6", "inverse-on-surface": "#f3f0ea", "on-tertiary-container": "#90da8d", "surface-variant": "#e5e2db", "surface": "#fcf9f2" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "gutter": "1.25rem", "margin": "1rem", "space-xl": "2.5rem", "space-sm": "0.5rem", "gutter-desktop": "2rem", "space-lg": "1.75rem", "margin-desktop": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "body-md": ["DM Sans"], "display-lg-mobile": ["Bricolage Grotesque"], "title-md": ["DM Sans"], "headline-lg": ["Bricolage Grotesque"], "body-lg": ["DM Sans"], "label-sm": ["DM Sans"], "headline-lg-mobile": ["Bricolage Grotesque"], "label-md": ["DM Sans"], "headline-md": ["Bricolage Grotesque"], "display-lg": ["Bricolage Grotesque"] }, "fontSize": { "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "display-lg-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "700" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "body-lg": ["17px", { "lineHeight": "28px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "700" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "800" }] } } } }</script><style class="" id="brand-animations">@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } } .brand-fade-in { animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; } .stagger-icon-1 { animation: fadeIn 0.8s ease-out 0.1s both; } .stagger-icon-2 { animation: fadeIn 0.8s ease-out 0.2s both; } .stagger-icon-3 { animation: fadeIn 0.8s ease-out 0.3s both; } .stagger-icon-4 { animation: fadeIn 0.8s ease-out 0.4s both; } 
+
+/* Floating golden fleck particles */
+@keyframes floatFleck {
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0.25; }
+  50% { transform: translateY(-35px) rotate(180deg) translateX(15px); opacity: 0.65; }
+  100% { transform: translateY(-70px) rotate(360deg); opacity: 0; }
+}
+.fleck {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(circle, #fdae3b 20%, rgba(253, 174, 59, 0) 70%);
+  border-radius: 50%;
+  animation: floatFleck 7s infinite ease-in-out;
+}
+
+/* 3D Card Deck / Flip Page Transition Engine */
+#page-viewport {
+  perspective: 2200px;
+  perspective-origin: 50% 25%;
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  overflow-x: hidden;
+}
+
+.book-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform-origin: 50% 20%;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+  transform: rotateY(25deg) scale(0.96) translateY(20px);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.book-page.page-active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: rotateY(0deg) scale(1) translateY(0);
+  filter: blur(0px);
+  z-index: 20;
+}
+
+.book-page.page-flip-left {
+  transform: rotateY(-38deg) scale(0.94) translateY(15px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.book-page.page-flip-right {
+  transform: rotateY(38deg) scale(0.94) translateY(15px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Subtle Shimmer on badges */
+@keyframes goldShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer-badge {
+  background-size: 200% 100%;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);
+  animation: goldShimmer 3.5s infinite;
+}
+
+/* 3D elevation on product cards */
+.cookie-card {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+}
+.cookie-card:hover {
+  transform: translateY(-6px) rotateX(2deg);
+  box-shadow: 0 16px 30px -10px rgba(132, 84, 0, 0.15), 0 6px 16px -6px rgba(0, 59, 129, 0.08);
+}
+
+/* Active Nav Indicator underline bar */
+.nav-flip-tab {
+  position: relative;
+  cursor: pointer;
+}
+.nav-flip-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2.5px;
+  background: #003b81;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-50%);
+}
+.nav-flip-tab.active-nav::after {
+  width: 80%;
+}
+
+@media (prefers-reduced-motion: reduce) { 
+  .brand-fade-in, .stagger-icon-1, .stagger-icon-2, .stagger-icon-3, .stagger-icon-4, .fleck, .shimmer-badge { 
+    animation: none !important; 
+    opacity: 1 !important; 
+    transform: none !important; 
+  } 
+  .book-page, .cookie-card {
+    transition: opacity 0.2s linear !important;
+    transform: none !important;
+  }
+}
+</style><style class="" id="brand-typography">:root { --font-heading: 'Gotham', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; --font-parkinsans: 'Parkinsans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } body, input, select, textarea, button { font-family: var(--font-parkinsans) !important; font-weight: 600; } h1, h2, h3, .font-display-lg, .font-headline-lg, .font-headline-md { font-family: var(--font-heading) !important; font-weight: 800; letter-spacing: -0.02em; } h1 { font-weight: 900 !important; } .font-title-md, .cookie-card [class*="font-title-md"], span[class*="font-title-md"], .cookie-card .text-primary, .cookie-card .text-tertiary { font-family: var(--font-parkinsans) !important; font-weight: 800 !important; } p, .font-body-lg, .font-body-md, .text-on-surface-variant { font-family: var(--font-parkinsans) !important; font-weight: 600; } .font-label-md, .font-label-sm, label, span[class*="rounded-full"], button, nav a, nav button, .cookie-card div span { font-family: var(--font-parkinsans) !important; } span[class*="rounded-full"], .font-label-sm.font-bold, .font-label-md.font-bold { font-weight: 800 !important; } .material-symbols-outlined { font-family: 'Material Symbols Outlined' !important; font-weight: normal !important; }</style><link class="" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Parkinsans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface antialiased relative overflow-x-hidden" style="background-color: rgb(250, 243, 234); color: rgb(28, 28, 24);">
+<!-- Ambient Warm Floating Flecks Background -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-70">
+<div class="fleck w-2.5 h-2.5 top-[18%] left-[8%]" style="animation-delay: 0s;"></div>
+<div class="fleck w-3 h-3 top-[35%] right-[12%]" style="animation-delay: 2.2s;"></div>
+<div class="fleck w-2 h-2 top-[62%] left-[24%]" style="animation-delay: 4.1s;"></div>
+<div class="fleck w-3.5 h-3.5 top-[78%] right-[20%]" style="animation-delay: 1.5s;"></div>
+<div class="fleck w-2 h-2 top-[48%] left-[78%]" style="animation-delay: 3.4s;"></div>
+</div>
+<header class="fixed top-0 left-0 w-full z-50 shadow-[0_4px_20px_rgba(21,82,166,0.06)]"><div class="bg-primary-container text-on-primary py-space-xs px-margin-desktop"><div class="max-w-7xl mx-auto flex items-center justify-center text-center gap-space-md"><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-primary-container flex items-center gap-space-xs"><span class="material-symbols-outlined text-[14px] text-secondary-container">eco</span>Pure Butter • No Palm Oil • Millet Goodness • Made With Love</span></div></div><div class="h-20 bg-surface/95 backdrop-blur-md px-margin md:px-margin-desktop flex items-center justify-between transition-all" style="background-color: rgba(250, 243, 234, 0.95); border-bottom: 1px solid rgb(238, 226, 209);"><div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-sm group text-left cursor-pointer bg-transparent border-0 p-0" data-path="home" onclick="navigateToPage('home')"><img alt="millaura-logo.png" class="w-auto object-contain h-14 brand-fade-in" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhb9hf6fIweuCTSVXZSsFIX95MsK2hsV16H4rLFr2f7SrBZm-xnNOOJE4vZfnZL00kOrFVS0N21CjA-pFZoHFxwpXH3PHvjGILyAyYqe8ObrmLGPVLzHmrQj8g4ZCnoG7j4Q1iLDpQH7KhGjknLLDC9O9BilntRBXtbc1BEkRtRoF1xBurJZBZJfAf77w3LA4lup7N4RKXZ0YJ2HQPupJxrz9IPgJcKGhOtifWR3XPUeTT4iF6jaNlFNwQMEDpEMnmvK8"/><div class="flex flex-col"></div></button></div><nav class="hidden lg:flex items-center gap-space-lg" id="desktop-nav"><button class="nav-flip-tab transition-colors text-primary font-bold active-nav" data-page="home" onclick="navigateToPage('home')">Home</button><button class="nav-flip-tab font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" data-page="collections" onclick="navigateToPage('collections')">Collections</button><button class="nav-flip-tab font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" data-page="wellness" onclick="navigateToPage('wellness')">Ingredients &amp; Wellness</button><button class="nav-flip-tab font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors font-semibold" data-page="about" onclick="navigateToPage('about')">About Us</button></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-space-sm bg-secondary-container text-on-secondary-container font-label-md text-label-md rounded-full hover:bg-secondary hover:text-on-secondary shadow-[0_2px_10px_rgba(253,174,59,0.3)] transition-all cursor-pointer" href="https://wa.me/917874427688?text=Hello%20Millaura%20Bakers,%20I%20would%20like%20to%20place%20an%20order" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">chat</span><span class="">Order +91 78744 27688</span></a></div></div></div>
+<!-- Mobile Sub-Navigation Bar for 3D Switching -->
+<div class="lg:hidden flex items-center justify-around bg-surface-container-high py-2 px-3 border-b border-surface-container-highest/60 text-xs font-semibold" style="background-color: rgb(244, 236, 223);">
+<button class="nav-flip-tab text-primary font-bold py-1 px-2 active-nav" data-page="home" onclick="navigateToPage('home')">Home</button>
+<button class="nav-flip-tab text-on-surface-variant py-1 px-2" data-page="collections" onclick="navigateToPage('collections')">Collections</button>
+<button class="nav-flip-tab text-on-surface-variant py-1 px-2" data-page="wellness" onclick="navigateToPage('wellness')">Wellness</button>
+<button class="nav-flip-tab text-on-surface-variant py-1 px-2" data-page="about" onclick="navigateToPage('about')">About Us</button>
+</div>
+</header>
+<main class="w-full pt-20 lg:pt-20 bg-background relative z-10" style="background-color: rgb(250, 243, 234);">
+<!-- 3D Perspective Card Deck Page Viewport -->
+<div class="w-full" id="page-viewport">
+<!-- ======================== PAGE 1: HOME ======================== -->
+<div class="book-page page-active w-full" id="view-home">
+<!-- Top Announce Wave Ribbon -->
+<section class="w-full bg-primary text-on-primary py-space-sm px-margin relative overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-space-sm font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="">Healthy Choices • Happy Moments</span>
+</div>
+<div class="flex items-center gap-space-md text-surface-bright">
+<span class="hidden md:inline-flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">verified</span> Freshly Handcrafted With Love</span>
+<a class="text-secondary-fixed hover:underline flex items-center gap-space-xs font-title-md" href="tel:+919825327688">
+<span class="material-symbols-outlined text-[16px]">call</span>
+            +91 98253 27688
+          </a>
+</div>
+</div>
+</section>
+<!-- Hero Section -->
+<section class="w-full bg-gradient-to-b from-primary/10 via-background to-surface-container-low py-space-xl px-margin md:px-margin-desktop relative overflow-hidden" style="background: rgb(250, 243, 234);">
+<div class="max-w-5xl mx-auto flex flex-col items-center text-center gap-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md shadow-sm shimmer-badge"><span class="material-symbols-outlined text-[18px]">verified</span>100% Wholesome Baking</span>
+<span class="font-label-md text-label-md text-primary font-bold hidden sm:inline">• Good Food Brings Smiles</span>
+</div>
+<div class="w-44 md:w-56 mb-space-xs">
+<img alt="Millaura Bakers Logo" class="w-full h-auto object-contain drop-shadow-sm mx-auto brand-fade-in" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhb9hf6fIweuCTSVXZSsFIX95MsK2hsV16H4rLFr2f7SrBZm-xnNOOJE4vZfnZL00kOrFVS0N21CjA-pFZoHFxwpXH3PHvjGILyAyYqe8ObrmLGPVLzHmrQj8g4ZCnoG7j4Q1iLDpQH7KhGjknLLDC9O9BilntRBXtbc1BEkRtRoF1xBurJZBZJfAf77w3LA4lup7N4RKXZ0YJ2HQPupJxrz9IPgJcKGhOtifWR3XPUeTT4iF6jaNlFNwQMEDpEMnmvK8" style="mix-blend-mode: multiply;"/>
+</div>
+<div class="flex flex-col gap-space-xs items-center">
+<span class="font-label-md text-label-md text-secondary tracking-widest uppercase">Pure Ingredients • Pure Butter • Millet Goodness</span>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight leading-tight max-w-3xl">Premium Cookie Collection</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Made with love, baked for wellness. Indulge in great melt-in-mouth cookies lovingly prepared with real dairy butter, stone-milled superfood millets, and unrefined natural jaggery. Zero palm oil, zero preservatives.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full max-w-3xl pt-space-xs">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col items-center text-center gap-space-xs group hover:bg-primary hover:text-on-primary transition-all stagger-icon-1 cursor-pointer" onclick="navigateToPage('wellness')">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary group-hover:bg-on-primary group-hover:text-primary transition-colors"><span class="material-symbols-outlined text-[24px]">bakery_dining</span></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Pure Butter</span>
+<span class="text-[11px] text-on-surface-variant group-hover:text-on-primary/80 leading-tight">No Margarine</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col items-center text-center gap-space-xs group hover:bg-primary hover:text-on-primary transition-all stagger-icon-2 cursor-pointer" onclick="navigateToPage('wellness')">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed/50 flex items-center justify-center text-tertiary group-hover:bg-on-primary group-hover:text-primary transition-colors"><span class="material-symbols-outlined text-[24px]">eco</span></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">No Palm Oil</span>
+<span class="text-[11px] text-on-surface-variant group-hover:text-on-primary/80 leading-tight">Conscious Care</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col items-center text-center gap-space-xs group hover:bg-primary hover:text-on-primary transition-all stagger-icon-3 cursor-pointer" onclick="navigateToPage('wellness')">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary group-hover:bg-on-primary group-hover:text-primary transition-colors"><span class="material-symbols-outlined text-[24px]">grain</span></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Millet Goodness</span>
+<span class="text-[11px] text-on-surface-variant group-hover:text-on-primary/80 leading-tight">Ragi &amp; Jowar</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col items-center text-center gap-space-xs group hover:bg-primary hover:text-on-primary transition-all stagger-icon-4 cursor-pointer" onclick="navigateToPage('about')">
+<div class="w-12 h-12 rounded-full bg-error-container/60 flex items-center justify-center text-error group-hover:bg-on-primary group-hover:text-primary transition-colors"><span class="material-symbols-outlined text-[24px]" style='font-variation-settings: "FILL" 1;'>favorite</span></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Made With Love</span>
+<span class="text-[11px] text-on-surface-variant group-hover:text-on-primary/80 leading-tight">Fresh Batches</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-space-md pt-space-xs">
+<a class="px-space-lg py-space-sm bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-md text-title-md rounded-full shadow-md flex items-center gap-space-xs transition-all transform hover:-translate-y-0.5" href="https://wa.me/917874427688?text=Hello%20Millaura%20Bakers!%20I%20would%20like%20to%20order%20from%20your%20Premium%20Cookie%20Collection." rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[22px]">chat</span>
+<span>Order on WhatsApp (+91 78744 27688)</span>
+</a>
+<button class="px-space-lg py-space-sm bg-primary text-on-primary hover:bg-primary-container font-title-md text-title-md rounded-full shadow-md flex items-center gap-space-xs transition-all cursor-pointer" onclick="navigateToPage('collections')">
+<span class="material-symbols-outlined text-[20px]">cookie</span>
+<span>Explore 4 Collections →</span>
+</button>
+</div>
+<div class="flex items-center justify-center gap-space-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+<span>“Goodness in every bite • Little Bites... Big Happiness”</span>
+</div>
+</div>
+</section>
+<!-- Home Spotlight Featured Bestseller Row -->
+<section class="w-full py-space-xl px-margin md:px-margin-desktop border-t border-surface-container-highest/60" style="background-color: rgb(247, 240, 230);">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg">
+<div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-space-sm">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Bakery Spotlight</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Signature Bestsellers</h2>
+</div>
+<button class="text-primary font-title-md flex items-center gap-1 hover:underline cursor-pointer" onclick="navigateToPage('collections')">
+            View All 18 Varieties <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Spotlight Card 1 -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between cursor-pointer" onclick="navigateToPage('collections')">
+<div class="w-full h-44 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);">
+<img alt="Classic Butter Cookie" class="w-full h-full object-cover transition-transform duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUYHZwHq9yDnxKMvowq_21lgs2v5veaU3T33Miyha3swP3ztf_JPklzhAcTELHcsFXXR20lsxTIgkYHLLlsO6Ia4b-cfE27DITBY26Gj1UlGp5SWhZ383dfS-VOGKD3rl6IZSV8hB64Q0bRfw2Tq8kNAP0GgybYrduWFe6p4AThEIbjbkxr9Ivz46-Ag6AHc1D6o7o01FjoHbqxpXDnFDR_dyOaR5Zt_DyS3wejyFDwZdWHtRuYGE2ucU0kE6B_uNnvok" style="filter: contrast(1.05) brightness(1.02);"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Classic Butter</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Signature</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">The timeless recipe with rich golden dairy butter crumb and melt-in-the-mouth comfort.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Pure dairy butter • Melt-in-mouth crumb</span>
+</div>
+</div>
+</div>
+<!-- Spotlight Card 2 -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between cursor-pointer" onclick="navigateToPage('collections')">
+<div class="w-full h-44 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);">
+<img alt="Multigrain Jaggery Cookie" class="w-full h-full object-cover transition-transform duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDux6OykuyuGchjMM_-QJFwuRVBjGO_S1x8QwtVMmZ6sVGOx4-ds6pY1yit1jq7ZI5ZveBuj0i_-Op_f5WoaWqBKEKj_POZQOVP9E6OPuTODp2f17WaG-zai353ys63z_y-sEeAjwnMrjskpAeMYLiFndxJ484JuMOJ94I70gC7bsjROrhpRk_P3OXZaMs8OYjNMewNlD55TzS7VAQHu40KjbbBbRhBb0_7jc29EzSl6R6cZ0gdYTB5gcoPeiYdd8xIRAs" style="filter: contrast(1.05) brightness(1.02);"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-tertiary">Multigrain Jaggery</span>
+<span class="px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Ancient Grains</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Nutritious powerhouse blending Ragi, Jowar, Oats, and Whole Wheat sweetened with desi gur.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-tertiary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Desi Jaggery • Zero Refined Sugar</span>
+</div>
+</div>
+</div>
+<!-- Spotlight Card 3 -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between cursor-pointer" onclick="navigateToPage('collections')">
+<div class="w-full h-44 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);">
+<img alt="Mini Chocolate Cookies" class="w-full h-full object-cover transition-transform duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz1aL359UHFWwpSOg4MTKo2vifDU76ikQMXZvMriYle3YdkKkWnQjEMSkQOv42es_2JavnVKTmH-L4lQd2llTUKCdxdTC0rUg2h24OfZb7okFXbHgusUS5zNJtcUsRKkQGLLts2FkXXLQNUWmEPhQ6BXevMZ0mSthxkCQ2tGKTbKcNJ_Ig-pbSksmARqup0T0z83M5kHJziATFdmyXGmWrzVi1MHbCYjtbF3-yWpiZxHQfM0rbtEwtWndjFhfBs5wtO1w" style="filter: contrast(1.05) brightness(1.02);"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Mini Chocolate</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Kids Favorite</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Adorable bite-sized crispy chocolate crunch buttons that make desk snacking pure joy.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Bite-sized buttons • Pure butter cocoa</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ======================== PAGE 2: COLLECTIONS ======================== -->
+<div class="book-page w-full" id="view-collections">
+<!-- Interactive Search / Filter Bar -->
+<section class="w-full bg-surface-container-high py-space-md px-margin md:px-margin-desktop sticky top-20 z-30 shadow-sm" style="background-color: rgb(244, 236, 223); border-bottom: 1px solid rgb(235, 220, 203);">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-xs overflow-x-auto w-full md:w-auto pb-space-xs md:pb-0 scrollbar-none" id="collection-tabs">
+<button class="collection-tab active px-space-md py-space-xs rounded-full font-label-md text-label-md bg-primary text-on-primary transition-all whitespace-nowrap shadow-sm cursor-pointer" onclick="filterRange('all', this)">
+            All Varieties (18)
+          </button>
+<button class="collection-tab px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all whitespace-nowrap shadow-sm cursor-pointer" onclick="filterRange('butter', this)">
+            Butter &amp; Signature
+          </button>
+<button class="collection-tab px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:bg-tertiary-container hover:text-on-primary transition-all whitespace-nowrap shadow-sm cursor-pointer" onclick="filterRange('millet', this)">
+            Millet &amp; Wholesome
+          </button>
+<button class="collection-tab px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all whitespace-nowrap shadow-sm cursor-pointer" onclick="filterRange('sugarfree', this)">
+            Sugar-Free Range
+          </button>
+<button class="collection-tab px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-all whitespace-nowrap shadow-sm cursor-pointer" onclick="filterRange('mini', this)">
+            Miniature Bites
+          </button>
+</div>
+<div class="relative w-full md:w-72">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-space-md py-space-xs bg-surface-container-lowest text-on-surface rounded-full font-body-md text-body-md shadow-sm outline-none focus:ring-2 focus:ring-primary transition-all" id="cookieSearch" onkeyup="searchCookies()" placeholder="Search flavor or ingredient..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Main Collections Showcase -->
+<section class="w-full bg-background py-space-xl px-margin md:px-margin-desktop" id="collections" style="background-color: rgb(250, 243, 234);">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
+<!-- Section Title Intro -->
+<div class="text-center max-w-2xl mx-auto flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">menu_book</span> Packaging Brochure Catalog
+          </span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Our Premium Range</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Handcrafted in hygienic micro-batches using unadulterated pure cow butter, ancient nutrient-packed millets, and unrefined farm jaggery.
+          </p>
+</div>
+<!-- COLLECTION A: BUTTER & SIGNATURE COLLECTION -->
+<div class="collection-group flex flex-col gap-space-lg" data-category="butter">
+<!-- Ribbon Header -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm bg-primary text-on-primary px-space-lg py-space-md rounded-lg shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[28px] text-secondary-container">breakfast_dining</span>
+<div>
+<h3 class="font-headline-md text-headline-md tracking-tight">Butter &amp; Signature Collection</h3>
+<p class="font-label-md text-label-md text-primary-fixed">100% Real Dairy Butter • Zero Margarine • Melt-in-Mouth Texture</p>
+</div>
+</div>
+<span class="px-space-md py-space-xs bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase rounded-full tracking-wider font-bold">
+              9 Master Recipes
+            </span>
+</div>
+<!-- Product Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- 1. Classic Butter -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Classic Butter"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Classic Butter Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUYHZwHq9yDnxKMvowq_21lgs2v5veaU3T33Miyha3swP3ztf_JPklzhAcTELHcsFXXR20lsxTIgkYHLLlsO6Ia4b-cfE27DITBY26Gj1UlGp5SWhZ383dfS-VOGKD3rl6IZSV8hB64Q0bRfw2Tq8kNAP0GgybYrduWFe6p4AThEIbjbkxr9Ivz46-Ag6AHc1D6o7o01FjoHbqxpXDnFDR_dyOaR5Zt_DyS3wejyFDwZdWHtRuYGE2ucU0kE6B_uNnvok" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Classic Butter</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Signature</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">The timeless recipe with rich golden dairy butter crumb, delicate flakiness, and melt-in-the-mouth comfort.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Pure dairy butter • Flour • Cane sugar</span>
+</div>
+</div>
+</div>
+<!-- 2. Royal Elaichi -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Royal Elaichi"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Royal Elaichi Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsI-12RnpfFT0RcUemzotmaBgTE8XdIcQW8Q2Nzhrr_JE1pZrKRZOoflLnHdtx7SuIJAqIyT7-DFsDyYkVGRbDd9tNbCgO-LHonz8JaW_BcmEVLFgGoY9r35VKR2aSj8Z2_2ZPjMEAGvY80Uwe4CC9sXtDX838ozDaCkPDgQmGAdyYtbl7BOeVVzxLDKVh6fVXSrECwnN-ywyhdRlEQRpvwfrTN7wlB1kn6lUsFijj_fS9o210QaccbynG2T2bKasEgKI" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Royal Elaichi</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Aromatic</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Infused with aromatic stone-ground green cardamom pods combined with silky dairy butter for traditional royalty.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Green Cardamom • Pure butter • Roasted wheat</span>
+</div>
+</div>
+</div>
+<!-- 3. Cashew Butter -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Cashew Butter"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Cashew Butter Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCwBVGO8hQW0hata5DMgT1aC-SMCOWAkx_iwQJCD2k5YokX5HjQq2ZWhju9ewnxKGlNbPiYHiNeJmhkjpnm036HWbklhJJQFpYwgcUVVTlopnfaSREZHkcVZW7awDAee3yDqjgB4Bc6GOsnMXfRemriPWEUxdkT1AfWWkmMCXo91NQWku2t0__1pHEouG0NsJjzHQOdQAAzM2KI5neCuIeWHnhrFm99Rxw2eWgWQfPPINWDq9VwtgEkOxaspPOKOApi04" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Cashew Butter</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Nutty</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Rich butter dough abundantly studded with slow-toasted Mangalorean cashew nut bits in every crunch.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Crunchy cashews • Pure dairy butter</span>
+</div>
+</div>
+</div>
+<!-- 4. Atta Walnut -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Atta Walnut"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Atta Walnut Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-DJZeGQ0JSyCmf6SNS6_dDTxdyyGgDKZKVrcK2VNO0P_3eSqJngasfvXlrIHM3w5nUR354re2obD_js68vTWRHo04ZKb70oU-ocAyWgJrcFA40lCxAznHT1CXOe9wh7n9bJnA05wJ6gavEtffgD5uAOxXhsst3zIcIPaPLgpexMiP7tLWaqsbilVX_q7HhBMFiVZOFIjdHGv7QmVuxBuXLdi161QcxbLH-0umYxvWybQj8MebCUYTVd7UZtp01e7QOrk" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Atta Walnut</span>
+<span class="px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Whole Wheat</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Wholesome whole wheat grain flour baked with crisp premium walnut kernels for a wholesome fiber-packed snack.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>100% Atta • Kashmiri walnuts • Pure butter</span>
+</div>
+</div>
+</div>
+<!-- 5. Atta Butter -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Atta Butter"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Atta Butter Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOGKm7gPLazvX3ZZ7pWrk6elULDGdLrwpyrCSpz-6UvQkemW48EhdB_gz3Xk4cnHqZUOum4_ZMbM89CpXIuBZNrKDLWtncrHD6pz3qG_icCYhws13uce3rdep-5CR1WElS-T1AvlzZAlaqptQA16HjmUMaUgzk4uC6skUlmBDJgUpdzcEOuycdGoJ1ghBj0XQYTPO5d4BBKAOWmchHbv8HD8u_hkkcWzULLl9TZt5ut7njzX7jH5AEt9hPpz6NP9pJ1Jk" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Atta Butter</span>
+<span class="px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Homestyle</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Traditional whole wheat flour crafted into crisp, golden cookies that celebrate Grandma’s hearth baking warmth.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Farm wheat atta • Churned butter</span>
+</div>
+</div>
+</div>
+<!-- 6. Classic Chocolate -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Classic Chocolate"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Classic Chocolate Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2vqcgXFoeyiOZ84zudbGL466CiwOdFUcwN39zVw6BDGGxEzP0KqPxigi9dMZdXEIbofmqdy6D7l4cQJ_5IZilw6osk8kUBWRGs67lz_ePxArmTfJVlpKd5dHOM27Cx0lPVDFZpmzl_6IknCuHDl6KzfHYkMj_QTEjjN44MobSSAyte7uik3RukItPu1Ej3MzNzZdTjkfJKyzZbRWzTfLml_DMIzOWH8VNBj7U86sPcgZigUVGiR_Q8eSUGLWq7dKXMAg" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Classic Chocolate</span>
+<span class="px-space-xs py-0.5 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-wider">Cocoa</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Pure Dutch-processed cocoa meets sweet churned butter for a velvety, dark chocolate indulgence that kids adore.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Dark cocoa • Pure butter • Chocolate notes</span>
+</div>
+</div>
+</div>
+<!-- 7. Jeera Butter Fingers -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Jeera Butter Fingers"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Jeera Butter Fingers" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxVdf28S7n7K2UBYdYyPk85KRe34eBOD-4iNbXzGFUqBRPMXM1-4TOp4g_AY-531fV-EeRrgqkpvfAea044cJuKxG8VF3F0UhKVGPKY3v89KJrPt95E-RCgsTn25iM54iMHb3u9H18Yyo6wcxcQXNyChIezadpgImbONKzhmpE4HHXoxgQUm_bzzkfqVuzzsUz2ACqXlcZXc1U1ESC7NGVciM1yMNww-Dv6acEby8kBgL7TQYIhuJByYBZz3OejsU_Tvo" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Jeera Butter Fingers</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Savory Crunch</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Crisp, savory finger cookies infused with gently roasted cumin seeds. The quintessential Indian chai companion.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Roasted Jeera • Rock salt • Pure butter</span>
+</div>
+</div>
+</div>
+<!-- 8. Classic Butter Fingers -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Classic Butter Fingers"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Classic Butter Fingers" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIEVGb-NWtefCdhFyxT2XvLTsHo19rf8lBqONZo8_d5J6A4g2x-iAZtWgbtZcNkgjF8Vu9R9p9a5z4xfuvUNIerxJPBZkDQO0hO1yflOBFH1NFS673A-TAPXkXuLLdpqxsOLUqRb6e3YV8xLALbsSHi0ob4yJjP_jsTzs55g72yOtpBF-9df0DmR14BYqfgCQPkBXgvGGhGTNSueljyCoj1wmeZNAQMeOg0I7WLBFCKyVCu-51UAHyhtLYS91dyadnQu4" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Classic Butter Fingers</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Tea-Time Dunk</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Slender, golden crisp finger batons created specifically for leisurely dunking in morning tea or coffee.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Pure dairy butter • Crispy snap</span>
+</div>
+</div>
+</div>
+<!-- 9. Chocolate Fingers -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Chocolate Fingers"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Chocolate Fingers" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnuJAQpfxMqMZhXUjT_y2g7QEsTcV_-1MOQEDLT0c64ZeLzfryYOz2XIcmgPWGTKM3aMhjRxGXWB2kZ0z0WoOg6KvOvs8Xzf36CPPcYfG6Lf5JnbvqAh9H8nndkao70YR7yBCBw92XXhsShgxWNxxbVxT0OXU1AcxMy7VLbm6uyd36vj1IsVy81eF_UEu5PZFp6HkVTkw5cWkzGJbC5940bADWy82-NyY1dw7Gh6jRUlMiyF5VQPVbVAH2Dnnpex0cTQ0" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Chocolate Fingers</span>
+<span class="px-space-xs py-0.5 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-wider">Choco Crunch</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Crisp finger biscuits layered with rich chocolate aroma and pure churned butter notes for sweet snacking breaks.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Dark cocoa blend • Pure butter</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- COLLECTION B: MILLET & WHOLESOME COLLECTION -->
+<div class="collection-group flex flex-col gap-space-lg" data-category="millet">
+<!-- Ribbon Header -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm bg-tertiary-container text-on-tertiary px-space-lg py-space-md rounded-lg shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[28px] text-tertiary-fixed">eco</span>
+<div>
+<h3 class="font-headline-md text-headline-md tracking-tight">Millet &amp; Wholesome Collection</h3>
+<p class="font-label-md text-label-md text-tertiary-fixed">Ancient Superfood Grains • Naturally Sweetened with Pure Jaggery • High Dietary Fiber</p>
+</div>
+</div>
+<span class="px-space-md py-space-xs bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm uppercase rounded-full tracking-wider font-bold">
+              Zero Refined Sugar
+            </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- 1. Multigrain Jaggery -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Multigrain Jaggery"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Multigrain Jaggery Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDux6OykuyuGchjMM_-QJFwuRVBjGO_S1x8QwtVMmZ6sVGOx4-ds6pY1yit1jq7ZI5ZveBuj0i_-Op_f5WoaWqBKEKj_POZQOVP9E6OPuTODp2f17WaG-zai353ys63z_y-sEeAjwnMrjskpAeMYLiFndxJ484JuMOJ94I70gC7bsjROrhpRk_P3OXZaMs8OYjNMewNlD55TzS7VAQHu40KjbbBbRhBb0_7jc29EzSl6R6cZ0gdYTB5gcoPeiYdd8xIRAs" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-tertiary">Multigrain Jaggery</span>
+<span class="px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Ancient Grains</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">A nutritious powerhouse blending Ragi, Jowar, Oats, and Whole Wheat sweetened with unrefined desi gur.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-tertiary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Desi Jaggery • 5 Ancient Grains • Pure Butter</span>
+</div>
+</div>
+</div>
+<!-- 2. Ragi Chocolate - Jaggery -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Ragi Chocolate Jaggery"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Ragi Chocolate Jaggery Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgqemaFPCabzUg4xAAx79iBM6G3ow1BKr6VjAnv_sJknEn-AVSfaUFzRnLL-ixmmDpcx-ALb4KuTqBcGyAzg8l3N9WN3nsmBFx645NrhQo2pPWrzF4PhTLbQpP_n26IGaId8MP4RV71Mnd-YdTGYiXziQ-2lJliUzzJPECuvX2F1HyY3sKpTm44aaN3xbcd9xPKW2WoKwMnemNfxxWiflSg1fYCRljpUJtEskKpj6qrApxm0NWMxDdmzuKxGvE6Re85ic" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-tertiary">Ragi Chocolate – Jaggery</span>
+<span class="px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Calcium Rich</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Mineral-rich finger millet combined with dark aromatic cocoa, sweetened solely with chemical-free jaggery.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-tertiary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Organic Ragi • Pure Cocoa • Desi Jaggery</span>
+</div>
+</div>
+</div>
+<!-- 3. Atta Jowar Caramel Almond -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Atta Jowar Caramel Almond"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Atta Jowar Caramel Almond Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuYsZOsOTIZb05Yq1XOvr1sKkTjO3jKpJ0HKnlWQbcHm-6WFxJFFpOrnQsbqh7pzuYdrMy_aJ1kd09ZyTmvfPm9y3wqo6n1xfd9ya18qFbsI65JhL_rNGMJJmj0reqAT6giIOWDjvj1QyGKL3nyfVmyu_3Rnho75D2jLIhuH5fxaSogRTiSFMX2-Qn1eJhAHqiAdwiMM-NA1LAsfdq9USdQrO_EPlBsx1R95m8pZH4yj9K4zlVTGu3Vtpvmhik_haEpSU" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-tertiary">Atta Jowar Caramel Almond</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Gourmet Crunch</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Sorghum millet flour, farm whole wheat, crisp California roasted almonds, and natural golden caramel undertones.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-tertiary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Jowar millet • Roasted almonds • Caramel touch</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- COLLECTION C: SUGAR-FREE COLLECTION -->
+<div class="collection-group flex flex-col gap-space-lg" data-category="sugarfree">
+<!-- Ribbon Header -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm bg-primary-container text-on-primary px-space-lg py-space-md rounded-lg shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[28px] text-secondary-fixed">health_and_safety</span>
+<div>
+<h3 class="font-headline-md text-headline-md tracking-tight">Sugar-Free Collection</h3>
+<p class="font-label-md text-label-md text-primary-fixed">Guilt-Free Diabetic Friendly Snacking • 0g Added Sugar • 100% Wholesome</p>
+</div>
+</div>
+<span class="px-space-md py-space-xs bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm uppercase rounded-full tracking-wider font-bold">
+              Zero Added Sugar
+            </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- 1. Coconut - Sugar Free -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Coconut Sugar Free"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Coconut Sugar Free Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-oBQ1ZczY44nromCV8sYx1s93zmMXX4LKcct0sK34lSRGNuG2E7_6G5XDYH7d_kYC57Ns3Q9Zhr_7hAWt454FaUsQVDuMD3TBkZsg1a2l4Wyiyjv_lwyDwBA2xLvvKDvCdywPAGCHggqyEa5dUleiR0-d6mZZGqnGfM_1EsNFncz03sxAzV0gO7XJMkimKWzFTf9q4nAoq0eWzEm0iWhjXHMxbqWDtai3uVQzXkIeVOyK0W-l_MXBn9mcZZnq-ThIu4M" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-title-md text-title-md text-primary">Coconut – Sugar Free</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Crispy, freshly desiccated slow-toasted coconut flakes baked to perfection with zero added sugar.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-primary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Toasted Coconut • Zero Sugar</span>
+</div>
+</div>
+</div>
+<!-- 2. Ragi Seeds - Sugar Free -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Ragi Seeds Sugar Free"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Ragi Seeds Sugar Free Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIYuywDjXl9oKAAJ1yIh15xplAOdhnLhGxKPH990Nbk6S7GcrMIgajkjjfXuknL9zmufS_NBeSP4KSlfcfpPwkvezNNttQeOQhCRB-grdMuOcwvZyqtEAgqIAL9mGPZU26JDGxmTq4wvbOT52P5BlLSBd6PiBYdP7XI7NouwSxEN8flNEOMs_GpXyiwnSC897B4f9TR1CH0-po6dK0ZteYXaKzNZKUw-NRGuQNUUPOxVztQ97flaukueioUX-lahxP0G0" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-title-md text-title-md text-primary">Ragi Seeds – Sugar Free</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Calcium-loaded finger millet packed with toasted sunflower, pumpkin, and flax seeds for continuous energy.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-primary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Ragi • Super Seeds • Zero Sugar</span>
+</div>
+</div>
+</div>
+<!-- 3. Ragi Coconut - Sugar Free -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Ragi Coconut Sugar Free"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Ragi Coconut Sugar Free Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWTLqHCk9cT9W3b-RYvD6d2jwsmiExNpq1G8Zns7leQVg1S5X_zZZmPitVN6IrFiILUqIxDwsp_bQt6VpBlVNjKepHJWKTx9OURHjpp_v5_KOsyPgPEBcD-MakOsJ3_ms00REH9vQFqFghs15bwlHTKag8tY9OFBY6Wq9rNpfsC1tB0S06fuHgzf5O5lpR4_trHguSvCY8OZsUyHBIY7us9QstA3RVMy4fWTaSf8Kwb9-1wkn58w_NBBAkMdzPP7Dr38c" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-title-md text-title-md text-primary">Ragi Coconut – Sugar Free</span>
+<p class="font-body-md text-body-md text-on-surface-variant">The delightful rustic unison of nutty finger millet and naturally sweet aromatic coconut flesh.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-primary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Ragi Flour • Coconut Flakes</span>
+</div>
+</div>
+</div>
+<!-- 4. Jowar Jeera - Sugar Free -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Jowar Jeera Sugar Free"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Jowar Jeera Sugar Free Cookie" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuzDuNq2NoxTy49VbegKCSx3WKaQ0p1JmqTLoxTaqcqw8mZJ7va4zUVW-n1NsC3DcrurPeg-hLSgAxzDBWurdfer3kgmC3tYIpCpK89MXF7VY-dDu2H7TZT85IOJ-ChhBk628o7Fs626ri1Dvrl8ZKwTD65FT7iZ-Wvu1FmsHHA2M6aVvSC0Z7AoJ_Y7dxne8b13tmC1ovjMo8qFiza0fwoLZNibJyD0JqwBpDH7xy4Rrof_hQfN6rCWemYlQWjGgb2pE" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-title-md text-title-md text-primary">Jowar Jeera – Sugar Free</span>
+<p class="font-body-md text-body-md text-on-surface-variant">A delicate savory sorghum biscuit lightly tempered with roasted cumin seeds and pink rock salt.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-primary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Jowar Millet • Cumin seeds • Savory</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- COLLECTION D: MINIATURE COLLECTION -->
+<div class="collection-group flex flex-col gap-space-lg" data-category="mini">
+<!-- Ribbon Header -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm bg-secondary-container text-on-secondary-container px-space-lg py-space-md rounded-lg shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[28px] text-on-secondary-container">cookie</span>
+<div>
+<h3 class="font-headline-md text-headline-md tracking-tight">Miniature Collection</h3>
+<p class="font-label-md text-label-md text-on-secondary-container/90">Little Bites... Big Happiness • Fun Munching For Kids &amp; Office Desks</p>
+</div>
+</div>
+<span class="px-space-md py-space-xs bg-surface-container-lowest text-secondary font-label-sm text-label-sm uppercase rounded-full tracking-wider font-bold">
+              Bite-Sized Fun
+            </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- 1. Mini Chocolate -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Mini Chocolate"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Mini Chocolate Cookies" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz1aL359UHFWwpSOg4MTKo2vifDU76ikQMXZvMriYle3YdkKkWnQjEMSkQOv42es_2JavnVKTmH-L4lQd2llTUKCdxdTC0rUg2h24OfZb7okFXbHgusUS5zNJtcUsRKkQGLLts2FkXXLQNUWmEPhQ6BXevMZ0mSthxkCQ2tGKTbKcNJ_Ig-pbSksmARqup0T0z83M5kHJziATFdmyXGmWrzVi1MHbCYjtbF3-yWpiZxHQfM0rbtEwtWndjFhfBs5wtO1w" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Mini Chocolate</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Kids Favorite</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Adorable bite-sized crispy chocolate crunch buttons that make snacking joyful and guilt-free.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Pure cocoa • Butter crunch • Bite-sized buttons</span>
+</div>
+</div>
+</div>
+<!-- 2. Mini Vanilla -->
+<div class="cookie-card bg-surface-container-lowest p-space-md rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-name="Mini Vanilla"><div class="w-full h-40 mb-space-sm rounded-lg overflow-hidden relative shadow-sm" style="background: rgb(253, 250, 246); border: 1px solid rgba(224, 159, 62, 0.2);"><img alt="Mini Vanilla Cookies" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUM2nUOacjHMkHn15-OrDazD74ofIg78x-9gPHkLsl_ZclCoYIKkWh-aaB9gonWF7WVg2e5oJTgUoYDXuLMnqRP5FqcuZWYT3Vx83xB6OOKNG3cdH2N2QTeyjPrzpEG5V_HxTVE9v9iFXVLapNHYs8Vn0CJxADb4PmDw6LByvurgi2QqCOlYWXbSKeC1nlQzByfQn0NvaF9Ukc42E09m9-uEM4snKR1yVPU_a6ITjK27Kx8BSupM4MLvvZqy6lAaURq84" style="filter: contrast(1.05) brightness(1.02);"/></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Mini Vanilla</span>
+<span class="px-space-xs py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded-full text-[10px] font-bold uppercase tracking-wider">Golden Crunch</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Golden miniature cookies baked with Madagascar vanilla extracts and pure creamy butter for pure delight.</p>
+<div class="flex items-center gap-space-xs text-[12px] text-secondary pt-space-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Madagascar Vanilla • Pure dairy butter</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ======================== PAGE 3: INGREDIENTS & WELLNESS ======================== -->
+<div class="book-page w-full" id="view-wellness">
+<!-- Ingredients & Wellness Spotlight Section -->
+<section class="w-full bg-surface-container-low py-space-xl px-margin md:px-margin-desktop" style="background-color: rgb(245, 238, 226);">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
+<div class="text-center max-w-2xl mx-auto flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Uncompromising Quality</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Ingredients &amp; Wellness Philosophy</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            We believe what goes into our ovens reflects who we are. Every recipe is formulated to bring health back to indulgence.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Pillar 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[26px]">water_drop</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary">100% Pure Dairy Butter</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Zero margarine. Zero hydrogenated vegetable fats (Dalda/Vanaspati). We only use golden wholesome dairy butter that melts cleanly on the palate.
+            </p>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[26px]">block</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary">Zero Palm Oil</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Commercial bakeries cut corners with cheap palm fractions. At Millaura, we maintain a strict 100% palm-free pledge for your heart health and planet care.
+            </p>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[26px]">grain</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary">Superfood Millets</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Nutrient-rich ancient grains: calcium-packed Ragi and fiber-dense Sorghum (Jowar), stone-milled to preserve dietary enzymes, vitamins, and minerals.
+            </p>
+</div>
+<!-- Pillar 4 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">spa</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary">Unrefined Sweeteners</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Selected collections sweetened with authentic regional sugarcane jaggery (Gur), delivering deep caramel complexity without refined white sugar spikes.
+            </p>
+</div>
+</div>
+<!-- Wholesome Nutritional Metrics Bar (Inline Visual Richness) -->
+<div class="bg-primary text-on-primary p-space-lg rounded-xl shadow-md grid grid-cols-2 md:grid-cols-4 gap-space-md text-center">
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-secondary-container leading-none font-bold">0%</span>
+<span class="font-label-md text-label-md mt-space-xs uppercase tracking-wider text-primary-fixed">Palm Oil Ever</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-secondary-container leading-none font-bold">100%</span>
+<span class="font-label-md text-label-md mt-space-xs uppercase tracking-wider text-primary-fixed">Pure Cow Butter</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-secondary-container leading-none font-bold">4x</span>
+<span class="font-label-md text-label-md mt-space-xs uppercase tracking-wider text-primary-fixed">Higher Fiber Millets</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-secondary-container leading-none font-bold">18+</span>
+<span class="font-label-md text-label-md mt-space-xs uppercase tracking-wider text-primary-fixed">Great Cookie Varieties</span>
+</div>
+</div>
+<!-- Additional Nutrition Comparison Table -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md mt-space-sm">
+<h3 class="font-headline-md text-headline-md text-primary">How Millaura Differs from Ordinary Cookies</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead>
+<tr class="border-b border-surface-container-highest text-secondary uppercase tracking-wider text-[12px] font-bold">
+<th class="py-3 px-4">Standard Supermarket Cookies</th>
+<th class="py-3 px-4 text-primary font-bold">Millaura Bakers Wholesome Promise</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/60 text-on-surface-variant text-[14px]">
+<tr>
+<td class="py-3 px-4 flex items-center gap-2"><span class="material-symbols-outlined text-error text-[18px]">close</span> Hydrogenated Palm Oil / Vanaspati</td>
+<td class="py-3 px-4 font-bold text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span> 100% Natural Dairy Butter only</td>
+</tr>
+<tr>
+<td class="py-3 px-4 flex items-center gap-2"><span class="material-symbols-outlined text-error text-[18px]">close</span> 100% Bleached Maida / Refined Flour</td>
+<td class="py-3 px-4 font-bold text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span> Stone-Milled Ragi, Jowar &amp; Whole Wheat</td>
+</tr>
+<tr>
+<td class="py-3 px-4 flex items-center gap-2"><span class="material-symbols-outlined text-error text-[18px]">close</span> High Fructose Corn Syrup &amp; Refined Sugar</td>
+<td class="py-3 px-4 font-bold text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span> Unrefined Desi Jaggery or Diabetic-Friendly Zero Sugar</td>
+</tr>
+<tr>
+<td class="py-3 px-4 flex items-center gap-2"><span class="material-symbols-outlined text-error text-[18px]">close</span> Artificial Preservatives &amp; Chemicals</td>
+<td class="py-3 px-4 font-bold text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span> Fresh Micro-Batches Handcrafted With Love</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ======================== PAGE 4: ABOUT US & ORDER BUILDER ======================== -->
+<div class="book-page w-full" id="view-about">
+<!-- Brand Story Hero Banner -->
+<section class="w-full py-space-xl px-margin md:px-margin-desktop bg-surface-container-low" style="background-color: rgb(246, 239, 229);">
+<div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-space-xl">
+<div class="w-full md:w-1/2 flex justify-center">
+<img alt="Millaura Bakers Story" class="w-72 md:w-80 h-auto rounded-2xl shadow-md border-4 border-surface-container-lowest object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhb9hf6fIweuCTSVXZSsFIX95MsK2hsV16H4rLFr2f7SrBZm-xnNOOJE4vZfnZL00kOrFVS0N21CjA-pFZoHFxwpXH3PHvjGILyAyYqe8ObrmLGPVLzHmrQj8g4ZCnoG7j4Q1iLDpQH7KhGjknLLDC9O9BilntRBXtbc1BEkRtRoF1xBurJZBZJfAf77w3LA4lup7N4RKXZ0YJ2HQPupJxrz9IPgJcKGhOtifWR3XPUeTT4iF6jaNlFNwQMEDpEMnmvK8" style="background: rgb(250, 243, 234);"/>
+</div>
+<div class="w-full md:w-1/2 flex flex-col gap-space-sm text-left">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Our Craft &amp; Heritage</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">Crafted with Pure Love, Baked for Wellness</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            At Millaura Bakers, we set out to restore honest, wholesome warmth to everyday teatime biscuits. Instead of industrial shortcuts like palm fractions and preservatives, we bake small micro-batches with real dairy butter and nutrition-dense superfood millets.
+          </p>
+<div class="flex items-center gap-space-sm pt-space-xs text-secondary font-title-md">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+<span>“Let's make life a little sweeter and a lot healthier.”</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive WhatsApp Order Builder & Confectionery Contact -->
+<section class="w-full bg-surface-container py-space-xl px-margin md:px-margin-desktop" style="background-color: rgb(250, 243, 234);">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Quick Order Builder -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Fast WhatsApp Checkout</span>
+<h3 class="font-headline-md text-headline-md text-primary">Custom Order Dispatch</h3>
+</div>
+<span class="material-symbols-outlined text-secondary-container text-[32px]">chat</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Select your favorite cookie selections, enter your quantity, and click once to generate an instantaneous WhatsApp order dispatched straight to our bakery master. (Net Weight 200g weight per box) 
+          </p>
+<form class="flex flex-col gap-space-md" id="orderForm" onsubmit="event.preventDefault(); sendCustomWhatsApp();">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="customerName">Your Full Name</label>
+<input class="px-space-md py-space-xs bg-surface-container-low rounded-lg outline-none focus:ring-2 focus:ring-primary font-body-md text-body-md" id="customerName" placeholder="e.g. Ramesh Shah" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="deliveryCity">Delivery City / Pin Code</label>
+<input class="px-space-md py-space-xs bg-surface-container-low rounded-lg outline-none focus:ring-2 focus:ring-primary font-body-md text-body-md" id="deliveryCity" placeholder="e.g. City / State / Pin Code" required="" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="cookieSelect">Select Primary Flavor</label>
+<select class="px-space-md py-space-xs bg-surface-container-low rounded-lg outline-none focus:ring-2 focus:ring-primary font-body-md text-body-md" id="cookieSelect">
+<option value="Classic Butter (Signature)">Classic Butter (Signature)</option>
+<option value="Royal Elaichi (Aromatic)">Royal Elaichi (Aromatic)</option>
+<option value="Cashew Butter (Nutty)">Cashew Butter (Nutty)</option>
+<option value="Atta Walnut (Whole Wheat)">Atta Walnut (Whole Wheat)</option>
+<option value="Atta Butter (Homestyle)">Atta Butter (Homestyle)</option>
+<option value="Classic Chocolate (Cocoa)">Classic Chocolate (Cocoa)</option>
+<option value="Jeera Butter Fingers (Savory)">Jeera Butter Fingers (Savory)</option>
+<option value="Classic Butter Fingers (Tea-time)">Classic Butter Fingers (Tea-time)</option>
+<option value="Chocolate Fingers">Chocolate Fingers</option>
+<option value="Multigrain Jaggery (Zero Sugar)">Multigrain Jaggery (Zero Sugar)</option>
+<option value="Ragi Chocolate - Jaggery">Ragi Chocolate - Jaggery</option>
+<option value="Atta Jowar Caramel Almond">Atta Jowar Caramel Almond</option>
+<option value="Coconut - Sugar Free">Coconut - Sugar Free</option>
+<option value="Ragi Seeds - Sugar Free">Ragi Seeds - Sugar Free</option>
+<option value="Ragi Coconut - Sugar Free">Ragi Coconut - Sugar Free</option>
+<option value="Jowar Jeera - Sugar Free">Jowar Jeera - Sugar Free</option>
+<option value="Mini Chocolate (Bite-sized Tub)">Mini Chocolate (Bite-sized Tub)</option>
+<option value="Mini Vanilla (Bite-sized Tub)">Mini Vanilla (Bite-sized Tub)</option>
+</select>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="boxesCount">Number of Boxes</label>
+<input class="px-space-md py-space-xs bg-surface-container-low rounded-lg outline-none focus:ring-2 focus:ring-primary font-body-md text-body-md" id="boxesCount" max="50" min="1" type="number" value="2"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="giftHamper">Gift Hamper Packaging?</label>
+<select class="px-space-md py-space-xs bg-surface-container-low rounded-lg outline-none focus:ring-2 focus:ring-primary font-body-md text-body-md" id="giftHamper">
+<option value="Standard Packaging">Standard Fresh Box</option>
+<option value="Festive Ribbon Gift Pack">Festive Ribbon Gift Pack (+₹50)</option>
+<option value="Assorted 4-Tin Royal Hamper">Assorted 4-Tin Royal Hamper (+₹150)</option>
+</select>
+</div>
+</div>
+<button class="w-full mt-space-xs py-space-sm px-space-lg bg-secondary-container hover:bg-secondary text-on-secondary-container hover:text-on-secondary font-title-md text-title-md rounded-full shadow-md flex items-center justify-center gap-space-xs transition-all cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span>Send Order to WhatsApp (+91 78744 27688)</span>
+</button>
+</form>
+</div>
+<!-- Factory & Direct Bakery Packaging Details -->
+<div class="lg:col-span-5 flex flex-col gap-space-md justify-between">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[26px]">storefront</span>
+<h3 class="font-title-md text-title-md font-bold">Direct From The Bakery</h3>
+</div>
+<div class="flex flex-col gap-space-sm font-body-md text-body-md">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">apartment</span>
+<div>
+<span class="font-bold text-on-surface">Manufactured &amp; Packed by:</span>
+<p class="text-on-surface-variant font-medium">MILLAURA BAKERS</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">call</span>
+<div class="flex flex-wrap gap-x-2">
+<a class="text-primary hover:underline font-bold" href="tel:+917874427688">+91 78744 27688</a>
+<span class="text-on-surface-variant">/</span>
+<a class="text-primary hover:underline font-bold" href="tel:+919825327688">+91 98253 27688</a>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">mail</span>
+<div class="flex flex-col">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="mailto:admin@millaurabakers.com">admin@millaurabakers.com</a>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">language</span>
+<span class="text-on-surface-variant">www.millaurabakers.com</span>
+</div>
+</div>
+<!-- Slogan Badge -->
+<div class="bg-secondary-fixed/40 p-space-sm rounded-lg text-center font-title-md text-title-md text-secondary">
+              “Let's make life a little sweeter”
+            </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<footer class="w-full bg-surface-container-high text-on-surface-variant pt-space-xl pb-space-lg relative z-20" style="background-color: rgb(245, 236, 224); border-top: 1px solid rgb(231, 219, 202);"><div class="max-w-7xl mx-auto px-margin md:px-margin-desktop"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl pb-space-xl"><div class="flex flex-col gap-space-sm md:col-span-1"><div class="flex items-center gap-space-sm"><img alt="Millaura Bakers Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhb9hf6fIweuCTSVXZSsFIX95MsK2hsV16H4rLFr2f7SrBZm-xnNOOJE4vZfnZL00kOrFVS0N21CjA-pFZoHFxwpXH3PHvjGILyAyYqe8ObrmLGPVLzHmrQj8g4ZCnoG7j4Q1iLDpQH7KhGjknLLDC9O9BilntRBXtbc1BEkRtRoF1xBurJZBZJfAf77w3LA4lup7N4RKXZ0YJ2HQPupJxrz9IPgJcKGhOtifWR3XPUeTT4iF6jaNlFNwQMEDpEMnmvK8"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Millaura Bakers</span></div><p class="font-body-md text-body-md text-on-surface-variant">Great handcrafted cookies and baked treats made with pure butter, wholesome millets, and unrefined sweeteners. No palm oil, ever.</p><div class="flex items-center gap-space-xs mt-space-sm"><span class="inline-flex items-center gap-space-xs px-space-sm py-space-xs bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm rounded-full"><span class="material-symbols-outlined text-[14px]">verified</span>100% Wholesome</span></div></div><div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-primary">Bakery Collections</span><ul class="flex flex-col gap-space-xs font-body-md text-body-md"><li class="hover:text-primary transition-colors cursor-pointer" onclick="navigateToPage('collections'); filterRange('butter')">Great Butter Cookies</li><li class="hover:text-primary transition-colors cursor-pointer" onclick="navigateToPage('collections'); filterRange('millet')">Millet &amp; Ragi Delights</li><li class="hover:text-primary transition-colors cursor-pointer" onclick="navigateToPage('sugarfree')">Sugar-Free Range</li><li class="hover:text-primary transition-colors cursor-pointer" onclick="navigateToPage('collections'); filterRange('mini')">Miniature Treats</li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-primary">Purity Guarantee</span><ul class="flex flex-col gap-space-xs font-body-md text-body-md"><li class="">• 100% Real Dairy Butter</li><li class="">• Zero Preservatives</li><li class="">• Cold-milled Local Millets</li><li class="">• Freshly Baked in Small Batches</li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-primary">Direct Confectionery</span><div class="flex flex-col gap-space-xs font-body-md text-body-md"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[20px]">call</span><a class="hover:text-primary transition-colors font-bold" href="tel:+917874427688">+91 78744 27688</a></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[20px]">mail</span><a class="hover:text-primary transition-colors" href="mailto:admin@millaurabakers.com">admin@millaurabakers.com</a></div></div><div class="mt-space-sm"></div></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md font-label-md text-label-md text-on-surface-variant"><p class="">© 2026 Millaura Bakers. All rights reserved. Registered Trademark.</p><p class="text-secondary">Wholesome great cookies baked with love &amp; purity.</p></div></div></footer>
+<!-- Interactive 3D Flip Page Transition & Filter Scripts -->
+<script>
+  const PAGE_ORDER = ['home', 'collections', 'wellness', 'about'];
+  let currentPage = 'home';
+  let isAnimating = false;
+
+  function navigateToPage(targetPage) {
+    if (currentPage === targetPage || isAnimating) return;
+    isAnimating = true;
+
+    const currentIndex = PAGE_ORDER.indexOf(currentPage);
+    const targetIndex = PAGE_ORDER.indexOf(targetPage);
+    const direction = targetIndex > currentIndex ? 'next' : 'prev';
+
+    const currentElem = document.getElementById('view-' + currentPage);
+    const targetElem = document.getElementById('view-' + targetPage);
+
+    // Update active nav indicators (both desktop & mobile)
+    document.querySelectorAll('.nav-flip-tab').forEach(el => {
+      if (el.getAttribute('data-page') === targetPage) {
+        el.classList.add('text-primary', 'font-bold', 'active-nav');
+        el.classList.remove('text-on-surface-variant');
+      } else {
+        el.classList.remove('text-primary', 'font-bold', 'active-nav');
+        el.classList.add('text-on-surface-variant');
+      }
+    });
+
+    // Prepare target element orientation based on flip direction
+    targetElem.style.display = 'block';
+    targetElem.classList.remove('page-active', 'page-flip-left', 'page-flip-right');
+    if (direction === 'next') {
+      targetElem.classList.add('page-flip-right');
+    } else {
+      targetElem.classList.add('page-flip-left');
+    }
+
+    // Force DOM reflow
+    void targetElem.offsetWidth;
+
+    // Flip transition out current element
+    if (direction === 'next') {
+      currentElem.classList.add('page-flip-left');
+    } else {
+      currentElem.classList.add('page-flip-right');
+    }
+    currentElem.classList.remove('page-active');
+
+    // Flip transition in target element
+    setTimeout(() => {
+      targetElem.classList.remove('page-flip-left', 'page-flip-right');
+      targetElem.classList.add('page-active');
+
+      // Scroll smoothly to top of page on change
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 40);
+
+    setTimeout(() => {
+      currentPage = targetPage;
+      isAnimating = false;
+    }, 660);
+  }
+
+  function filterRange(category, btnElement) {
+    const tabs = document.querySelectorAll('.collection-tab');
+    tabs.forEach(tab => {
+      tab.classList.remove('bg-primary', 'text-on-primary', 'bg-tertiary-container', 'bg-secondary-container');
+      tab.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+    });
+
+    const activeBtn = btnElement || document.querySelector(`.collection-tab[onclick*="'${category}'"]`);
+    if (activeBtn) {
+      activeBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      if (category === 'millet') {
+        activeBtn.classList.add('bg-tertiary-container', 'text-on-tertiary');
+      } else if (category === 'mini') {
+        activeBtn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      } else {
+        activeBtn.classList.add('bg-primary', 'text-on-primary');
+      }
+    }
+
+    const groups = document.querySelectorAll('.collection-group');
+    groups.forEach(group => {
+      if (category === 'all' || group.getAttribute('data-category') === category) {
+        group.style.display = 'flex';
+      } else {
+        group.style.display = 'none';
+      }
+    });
+  }
+
+  function searchCookies() {
+    const query = document.getElementById('cookieSearch').value.toLowerCase();
+    const cards = document.querySelectorAll('.cookie-card');
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function sendCustomWhatsApp() {
+    const name = document.getElementById('customerName').value;
+    const city = document.getElementById('deliveryCity').value;
+    const cookie = document.getElementById('cookieSelect').value;
+    const boxes = document.getElementById('boxesCount').value;
+    const pack = document.getElementById('giftHamper').value;
+
+    const message = `Hello Millaura Bakers! I want to place an order:%0A%0A*Name:* ${encodeURIComponent(name)}%0A*City:* ${encodeURIComponent(city)}%0A*Item:* ${encodeURIComponent(cookie)}%0A*Boxes:* ${encodeURIComponent(boxes)}%0A*Packing:* ${encodeURIComponent(pack)}%0A%0APlease share total & payment details!`;
+
+    window.open(`https://wa.me/917874427688?text=${message}`, '_blank');
+  }
+</script>
+</body></html>
